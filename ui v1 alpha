@@ -596,6 +596,6 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 			end
 		end
 	end)
-	
+	print("successfully created ui options!")
 end
 startMenu()
