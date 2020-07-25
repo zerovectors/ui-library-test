@@ -1,0 +1,601 @@
+function startMenu()
+	warn("starting menu");
+	warn("creating ui");
+	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
+	ui.Name = "Vect0rs hub";
+	print("successfully  created "..ui.Name.. "'s ui!");
+	warn("creating mainframe");
+	local mainframe = Instance.new("Frame", ui);
+	mainframe.Name = "mainframe";
+	mainframe.Size = UDim2.new(0, 1655,0, 804);
+	mainframe.Position = UDim2.new(0.15, 0,0.013, 0)
+	mainframe.BackgroundTransparency = 1;
+	local uilistlayout = Instance.new("UIListLayout", mainframe)
+	uilistlayout.FillDirection = "Horizontal"
+	uilistlayout.Padding = UDim.new(0,10)
+	print("successfully  created mainframe!");
+	warn("creating folders");
+	local windowsfolder = Instance.new("Folder", ui);
+	windowsfolder.Name = "Windows"
+	local templatesfolder = Instance.new("Folder", ui);
+	templatesfolder.Name = "Templates";
+	local optionsfolder = Instance.new("Folder", ui);
+	optionsfolder.Name = "Options";
+	print("successfully  created folders!")
+	-- creation of frame templates --
+	warn("creating templates")
+	
+	-- button template
+	local buttontemplateframe = Instance.new("Frame",templatesfolder);
+	buttontemplateframe.Name = "Template Button";
+	buttontemplateframe.BackgroundColor3 = Color3.fromRGB(35,35,35);
+	buttontemplateframe.Position = UDim2.new(0.019, 0,0.132, 0);
+	buttontemplateframe.Size = UDim2.new(0, 271,0, 31);
+	buttontemplateframe.Visible = false;
+	buttontemplateframe.BorderSizePixel = 0;
+	local buttontemplatebutton = Instance.new("TextButton", buttontemplateframe);
+	buttontemplatebutton.Name = "Button";
+	buttontemplatebutton.BackgroundTransparency = 1;
+	buttontemplatebutton.Position = UDim2.new(0.027,0,0,0);
+	buttontemplatebutton.Size = UDim2.new(0,263,0,30);
+	buttontemplatebutton.TextColor3 = Color3.fromRGB(255,255,255)
+	buttontemplatebutton.TextSize = 17
+	buttontemplatebutton.Font = "SourceSans"
+	buttontemplatebutton.TextXAlignment = "Left"
+	
+	-- label template
+	local labeltemplateframe = Instance.new("Frame",templatesfolder);
+	labeltemplateframe.Name = "Template Label";
+	labeltemplateframe.BackgroundColor3 = Color3.fromRGB(35,35,35);
+	labeltemplateframe.Position = UDim2.new(0.019, 0,0.132, 0);
+	labeltemplateframe.Size = UDim2.new(0, 271,0, 31);
+	labeltemplateframe.Visible = false;
+	labeltemplateframe.BorderSizePixel = 0;
+	local labeltemplatelabel = Instance.new("TextLabel", labeltemplateframe);
+	labeltemplatelabel.Name = "Label";
+	labeltemplatelabel.BackgroundTransparency = 1;
+	labeltemplatelabel.Position = UDim2.new(0.027,0,0,0);
+	labeltemplatelabel.Size = UDim2.new(0,262,0,30);
+	labeltemplatelabel.TextColor3 = Color3.fromRGB(255,255,255);
+	labeltemplatelabel.TextSize = 17;
+	labeltemplatelabel.Font = "SourceSans"
+	labeltemplatelabel.TextXAlignment = "Left"
+	
+	-- toggle button template
+	local togglebuttontemplateframe = Instance.new("Frame",templatesfolder);
+	togglebuttontemplateframe.Name = "Template Toggle Button";
+	togglebuttontemplateframe.BackgroundColor3 = Color3.fromRGB(35,35,35);
+	togglebuttontemplateframe.Position = UDim2.new(0.019, 0,0.132, 0);
+	togglebuttontemplateframe.Size = UDim2.new(0, 271,0, 31);
+	togglebuttontemplateframe.Visible = false;
+	togglebuttontemplateframe.BorderSizePixel = 0;
+	local labeltemplatelabel = Instance.new("TextLabel", togglebuttontemplateframe);
+	labeltemplatelabel.Name = "Name";
+	labeltemplatelabel.BackgroundTransparency = 1;
+	labeltemplatelabel.Position = UDim2.new(0.027,0,0,0);
+	labeltemplatelabel.Size = UDim2.new(0, 218,0, 30);
+	labeltemplatelabel.TextColor3 = Color3.fromRGB(255,255,255);
+	labeltemplatelabel.TextSize = 17;
+	labeltemplatelabel.Font = "SourceSans";
+	labeltemplatelabel.TextXAlignment = "Left"
+	local buttontemplatebutton = Instance.new("TextButton", togglebuttontemplateframe);
+	buttontemplatebutton.Name = "Toggle";
+	buttontemplatebutton.Text = "OFF";
+	buttontemplatebutton.BackgroundTransparency = 1;
+	buttontemplatebutton.Position = UDim2.new(0.838, 0,0, 0);
+	buttontemplatebutton.Size = UDim2.new(0, 44,0, 30);
+	buttontemplatebutton.TextColor3 = Color3.fromRGB(255,255,255);
+	buttontemplatebutton.TextSize = 17;
+	buttontemplatebutton.Font = "SourceSans";
+	buttontemplatebutton.TextXAlignment = "Left"
+	
+	-- window template
+	local windowtemplateframe = Instance.new("Frame",templatesfolder);
+	windowtemplateframe.Name = "Template Window";
+	windowtemplateframe.BackgroundColor3 = Color3.fromRGB(35,35,35);
+	windowtemplateframe.BackgroundTransparency = 1;
+	windowtemplateframe.Position = UDim2.new(0,0,0,0);
+	windowtemplateframe.Size = UDim2.new(0, 271,0, 480);
+	windowtemplateframe.Visible = false;
+	windowtemplateframe.BorderSizePixel = 0;
+	windowtemplateframe.ClipsDescendants = true
+	local selection = Instance.new("Frame", windowtemplateframe);
+	selection.Name = "Selection";
+	selection.BackgroundTransparency = 1;
+	selection.Size = UDim2.new(0, 271,0, 130);
+	selection.Position = UDim2.new(-0.004, 0,0.087, 0)
+	local uilistlayout = Instance.new("UIListLayout", selection);
+	local title = Instance.new("TextLabel", windowtemplateframe);
+	title.Size = UDim2.new(0, 271,0, 41);
+	title.Position = UDim2.new(-0.002, 0,-0.002, 0)
+	title.BackgroundColor3 = Color3.fromRGB(35,35,35);
+	title.BorderSizePixel = 0;
+	title.Font = "SourceSans";
+	title.TextSize = 18;
+	title.TextColor3 = Color3.fromRGB(255,255,255);
+	title.Name = "Title";
+	local line = Instance.new("ImageLabel", windowtemplateframe);
+	line.Size = UDim2.new(0, 270,0, 2);
+	line.Position = UDim2.new(-0.003, 0,0.077, 0);
+	line.Image = "";
+	line.BackgroundColor3 = Color3.fromRGB(185, 20, 255);
+	line.Name = "Line"
+	local togglebutton = Instance.new("TextButton", title);
+	togglebutton.Name = "toggle"
+	togglebutton.BackgroundTransparency = 1;
+	togglebutton.Font = "SourceSans";
+	togglebutton.TextSize = 25;
+	togglebutton.Text = "-";
+	togglebutton.TextColor3 = Color3.fromRGB(255,255,255)
+	togglebutton.Size = UDim2.new(0, 44,0, 41);
+	togglebutton.Position = UDim2.new(0.838, 0,0, 0);
+	print("successfully created templates!");
+	print("menu successfully started!");
+	
+	warn("creating ui options");
+	-- main shit
+local visuals=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
+visuals.Name="Visuals"
+local newwindow=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
+newwindow.Name="test"
+local character=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
+character.Name="Character"
+
+
+-- visual options
+local visualsoptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
+visualsoptions.Name = "Visuals Options"
+local visualstogglebuttonoptions=Instance.new("Folder", visualsoptions)
+visualstogglebuttonoptions.Name = "Toggle Options"
+local visualsbuttonoptions=Instance.new("Folder", visualsoptions)
+visualsbuttonoptions.Name = "Button Options"
+local visualslabeloptions=Instance.new("Folder", visualsoptions)
+visualslabeloptions.Name = "Label Options"
+-- character options
+local characteroptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
+characteroptions.Name = "Character Options"
+local charactertogglebuttonoptions=Instance.new("Folder", characteroptions)
+charactertogglebuttonoptions.Name = "Toggle Options"
+local characterbuttonoptions=Instance.new("Folder", characteroptions)
+characterbuttonoptions.Name = "Button Options"
+local characterlabeloptions=Instance.new("Folder", characteroptions)
+characterlabeloptions.Name = "Label Options"
+--testing ignore
+local multipleoptions = Instance.new("Folder",characteroptions)
+multipleoptions.Name = "Multiple Options"
+local multipleoptionsoptions = Instance.new("Folder",multipleoptions)
+multipleoptionsoptions.Name = "Test"
+
+
+function setupui()
+	-- actual window tabs
+	for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows:GetChildren()) do
+		local window = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates['Template Window']:Clone();
+		window.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe;
+		window.Visible=true;
+		window.Name=v.Name;
+		window:WaitForChild("Title").Text=v.Name;
+	end
+	-- multiple options in a tab
+	
+	-- visuals
+	for i,v in pairs(visualstogglebuttonoptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Name").Text=v.Name;
+	end
+	for i,v in pairs(visualsbuttonoptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Button"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Button").Text=v.Name;
+	end
+	for i,v in pairs(visualslabeloptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Label"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Label").Text=v.Name;
+	end
+	--chartacter
+	for i,v in pairs(charactertogglebuttonoptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Name").Text=v.Name;
+	end
+	for i,v in pairs(characterbuttonoptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Button"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Button").Text=v.Name;
+	end
+	for i,v in pairs(characterlabeloptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Label"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Label").Text=v.Name;
+	end
+--[[	for i,v in pairs(multipleoptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Multiple options"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button.Namee.Text = v.Name; 
+	end
+	for i,v in pairs(multipleoptionsoptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test.Options;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Name").Text=v.Name;
+	end]]
+end
+
+--[[	--- options u can add ---
+	-  Template Multiple options
+	-  Template Button
+	-  Template Label
+	-  Template Toggle Button
+	-  Template Window
+	- Template Hotkey Button
+	-
+]]
+
+-- settings
+local settings = {
+	fullbright = false;
+	superjump = false;
+	superspeed = false;
+	linecolor = Color3.fromRGB(221, 3, 255);
+	on = Color3.fromRGB(221, 3, 255);
+	off = Color3.fromRGB(255,255,255);
+	visualopen = true;
+	characteropen = true;
+	vfly = false;
+	noclip = false;
+	testopen = true;
+}
+-- colour shit
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
+
+--visuals
+local fullbright = Instance.new("Folder", visualstogglebuttonoptions)
+fullbright.Name = "FullBright"
+-- character
+local superjump = Instance.new("Folder", charactertogglebuttonoptions)
+superjump.Name = "Super Jump"
+local superspeed = Instance.new("Folder", charactertogglebuttonoptions)
+superspeed.Name = "Super Speed"
+local fly = Instance.new("Folder", charactertogglebuttonoptions)
+fly.Name = "Fly"
+local noclip = Instance.new("Folder", charactertogglebuttonoptions)
+noclip.Name = "Noclip"
+
+local option1 = Instance.new("Folder",multipleoptionsoptions)
+option1.Name = "option 1 test"
+local option2 = Instance.new("Folder",multipleoptionsoptions)
+option2.Name = "option 2 test"
+setupui()
+
+local mouse = game.Players.LocalPlayer:GetMouse();
+local frames = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe
+local TweenService = game:GetService("TweenService")
+local function Tween(Object, Property, Style, Direction, Time)
+    return TweenService:Create(Object, TweenInfo.new(Time, Enum.EasingStyle[Style], Enum.EasingDirection[Direction]), Property):Play()
+end
+local visual = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Selection:GetDescendants()
+local character = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Selection:GetDescendants()
+
+function tweening()
+	if settings.visualopen then
+		for index, visual in pairs(visual) do
+		    if visual:IsA("Frame") then
+				Tween(visual, {BackgroundTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				wait(.1)
+				visual.Visible = true
+			end
+		end		
+		for index, visual in pairs(visual) do
+		    if visual:IsA("TextButton") then
+				Tween(visual, {TextTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				visual.Visible = true
+			end
+		end	
+		for index, visual in pairs(visual) do
+		    if visual:IsA("TextLabel") then
+				Tween(visual, {TextTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				visual.Visible = true
+			end
+		end	
+	else
+			for index, visual in pairs(visual) do
+		    if visual:IsA("Frame") then
+				Tween(visual, {BackgroundTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+				wait(.1)
+				visual.Visible = false
+			end
+		end		
+		for index, visual in pairs(visual) do
+		    if visual:IsA("TextButton") then
+				Tween(visual, {TextTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+			end
+		end	
+		for index, visual in pairs(visual) do
+		    if visual:IsA("TextLabel") then
+				Tween(visual, {TextTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+			end
+		end		
+	end
+		if settings.characteropen then
+		for index, character in pairs(character) do
+		    if character:IsA("Frame") then
+				Tween(character, {BackgroundTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				wait(.1)
+				character.Visible = true
+			end
+		end		
+		for index, character in pairs(character) do
+		    if character:IsA("TextButton") then
+				Tween(character, {TextTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				character.Visible = true
+			end
+		end	
+		for index, character in pairs(character) do
+		    if character:IsA("TextLabel") then
+				Tween(character, {TextTransparency = 0}, "Linear", "Out", .1) --these are just an examples
+				character.Visible = true
+			end
+		end	
+	else
+			for index, character in pairs(character) do
+		    if character:IsA("Frame") then
+				Tween(character, {BackgroundTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+				wait(.1)
+				character.Visible = false
+			end
+		end		
+		for index, character in pairs(character) do
+		    if character:IsA("TextButton") then
+				Tween(character, {TextTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+			end
+		end	
+		for index, character in pairs(character) do
+		    if character:IsA("TextLabel") then
+				Tween(character, {TextTransparency = 1}, "Linear", "Out", .1) --these are just an examples
+			end
+		end		
+	end
+end
+-- script shit
+
+-- functions
+vflyspeed = 1
+vehicleflyspeed = 1
+function sFLY(vfly)
+	repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart') and game.Players.LocalPlayer.Character:FindFirstChild('Humanoid')
+	repeat wait() until mouse
+
+	local T = game.Players.LocalPlayer.Character.HumanoidRootPart
+	local CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+	local lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+	local SPEED = 0
+
+	local function FLY()
+		settings.vfly = true
+		local BG = Instance.new('BodyGyro', T)
+		local BV = Instance.new('BodyVelocity', T)
+		BG.P = 9e4
+		BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		BG.cframe = T.CFrame
+		BV.velocity = Vector3.new(0, 0, 0)
+		BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		spawn(function()
+			repeat wait()
+			if not vfly then
+				game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+			end
+			if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
+				SPEED = 50
+			elseif not (CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0) and SPEED ~= 0 then
+				SPEED = 0
+			end
+			if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 or (CONTROL.Q + CONTROL.E) ~= 0 then
+				BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+				lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
+			elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and (CONTROL.Q + CONTROL.E) == 0 and SPEED ~= 0 then
+				BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, (lCONTROL.F + lCONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+			else
+				BV.velocity = Vector3.new(0, 0, 0)
+			end
+			BG.cframe = workspace.CurrentCamera.CoordinateFrame
+			until not settings.vfly
+			CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			SPEED = 0
+			BG:destroy()
+			BV:destroy()
+			game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+		end)
+	end
+	mouse.KeyDown:connect(function(KEY)
+		if KEY:lower() == 'w' then
+			if vfly then
+				CONTROL.F = vehicleflyspeed
+			else
+				CONTROL.F = vflyspeed
+			end
+		elseif KEY:lower() == 's' then
+			if vfly then
+				CONTROL.B = - vehicleflyspeed
+			else
+				CONTROL.B = - vflyspeed
+			end
+		elseif KEY:lower() == 'a' then
+			if vfly then
+				CONTROL.L = - vehicleflyspeed
+			else
+				CONTROL.L = - vflyspeed
+			end
+		elseif KEY:lower() == 'd' then
+			if vfly then
+				CONTROL.R = vehicleflyspeed
+			else
+				CONTROL.R = vflyspeed
+            end
+        elseif KEY:lower() == 'e' then
+            if vfly then
+                CONTROL.Q = vehicleflyspeed*2
+            else
+                CONTROL.Q = vflyspeed*2
+            end
+        elseif KEY:lower() == 'q' then
+            if vfly then
+                CONTROL.E = -vehicleflyspeed*2
+            else
+                CONTROL.E = -vflyspeed*2
+            end
+		end
+	end)
+	mouse.KeyUp:connect(function(KEY)
+		if KEY:lower() == 'w' then
+			CONTROL.F = 0
+		elseif KEY:lower() == 's' then
+			CONTROL.B = 0
+		elseif KEY:lower() == 'a' then
+			CONTROL.L = 0
+		elseif KEY:lower() == 'd' then
+            CONTROL.R = 0
+        elseif KEY:lower() == 'e' then
+            CONTROL.Q = 0
+        elseif KEY:lower() == 'q' then
+            CONTROL.E = 0
+		end
+	end)
+	FLY()
+end
+
+function NOFLY()
+	settings.vfly = false
+	game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+end
+
+-- toggle stuff
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Title.toggle.MouseButton1Down:Connect(function()
+	settings.visualopen = not settings.visualopen
+	if settings.visualopen then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals"):TweenSize(UDim2.new(0, 271,0, 488), "Out", "Linear", .2, true)
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Line.Position = UDim2.new(0.001, 0,0.083, 0)
+		--tweening()
+	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals"):TweenSize(UDim2.new(0, 271,0, 43), "Out", "Linear", .2, true)
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Line.Position = UDim2.new(-0.003, 0,0.878, 0)
+		--tweening()
+	end
+end)
+
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Title.toggle.MouseButton1Down:Connect(function()
+	settings.characteropen = not settings.characteropen
+	if settings.characteropen then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character"):TweenSize(UDim2.new(0, 271,0, 488), "Out", "Linear", .2, true)
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Line.Position = UDim2.new(0.001, 0,0.083, 0)
+		--tweening()
+	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character"):TweenSize(UDim2.new(0, 271,0, 40), "Out", "Linear", .2, true)
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Line.Position = UDim2.new(0.001, 0,0.916, 0)
+		--tweening()
+	end
+end)
+
+--[[game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test.Namee.toggle.MouseButton1Down:Connect(function()
+	settings.testopen = not settings.testopen
+	if settings.testopen then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test:TweenSize(UDim2.new(0, 271,0, 619), "Out", "Linear", .2, true)
+		--tweening()
+	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test:TweenSize(UDim2.new(0, 271,0, 29), "Out", "Linear", .2, true)
+		--tweening()
+	end
+end)]]
+
+-- main
+
+--visual shit
+
+
+-- character shit
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.MouseButton1Down:Connect(function()
+	settings.superjump = not settings.superjump
+	if settings.superjump then
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = 500
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.TextColor3 = settings.on
+	else
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.TextColor3 = settings.off
+	end
+	warn(game.Players.LocalPlayer.Name.."'s jumpower is; "..game.Players.LocalPlayer.Character.Humanoid.JumpPower)
+end)
+
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Speed"].Toggle.MouseButton1Down:Connect(function()
+	settings.superspeed = not settings.superspeed
+	if settings.superspeed then
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 150
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Speed"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Speed"].Toggle.TextColor3 = settings.on
+	else
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Speed"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Speed"].Toggle.TextColor3 = settings.off
+	end
+	warn(game.Players.LocalPlayer.Name.."'s walkspeed is; "..game.Players.LocalPlayer.Character.Humanoid.WalkSpeed)
+end)
+
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.MouseButton1Down:Connect(function()
+	settings.vfly = not settings.vfly
+	warn(settings.vfly)
+	if settings.vfly then
+		sFLY()
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.TextColor3 = settings.on
+	else
+		NOFLY()
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.TextColor3 = settings.off
+	end
+end)
+
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.MouseButton1Down:Connect(function()
+	settings.noclip = not settings.noclip
+	warn(settings.noclip)
+	if settings.noclip then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.TextColor3 = settings.on
+		local function NoclipLoop()
+	      if settings.noclip == false and game.Players.LocalPlayer.Character ~= nil then
+	          for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	          		if child:IsA("BasePart") and child.CanCollide == true then
+	              		child.CanCollide = false
+		          	  end
+		        	end
+		    	end
+		    end
+			Noclipping = game:GetService('RunService').Stepped:connect(NoclipLoop)
+	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.TextColor3 = settings.off
+			if Noclipping then
+		      		Noclipping:Disconnect()
+			end
+		end
+	end)
+	
+end
+startMenu()
