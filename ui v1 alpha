@@ -660,8 +660,3 @@ mousebuttonscriptshit();
 
 -- colour shit
 game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
---[[
-local frames = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe
-local visual = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Selection:GetDescendants()
-local character = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Selection:GetDescendants()
-]]
