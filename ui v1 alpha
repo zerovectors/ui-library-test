@@ -116,7 +116,7 @@ function startMenu()
 	title.Name = "Title";
 	local line = Instance.new("ImageLabel", windowtemplateframe);
 	line.Size = UDim2.new(0, 270,0, 2);
-	line.Position = UDim2.new(-0.003, 0,0.077, 0);
+	line.Position = UDim2.new(0.001, 0,0.083, 0)
 	line.Image = "";
 	line.BackgroundColor3 = Color3.fromRGB(185, 20, 255);
 	line.Name = "Line"
@@ -275,6 +275,8 @@ local superspeed = Instance.new("Folder", charactertogglebuttonoptions)
 superspeed.Name = "Super Speed"
 local fly = Instance.new("Folder", charactertogglebuttonoptions)
 fly.Name = "Fly"
+local vehiclefly = Instance.new("Folder", charactertogglebuttonoptions)
+vehiclefly.Name = "Vehicle Fly"
 local noclip = Instance.new("Folder", charactertogglebuttonoptions)
 noclip.Name = "Noclip"
 
@@ -569,6 +571,20 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 		NOFLY()
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.TextColor3 = settings.off
+	end
+end)
+	
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.MouseButton1Down:Connect(function()
+	settings.vfly = not settings.vfly
+	warn(settings.vfly)
+	if settings.vfly then
+		sFLY(true)
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.TextColor3 = settings.on
+	else
+		NOFLY()
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.TextColor3 = settings.off
 	end
 end)
 
