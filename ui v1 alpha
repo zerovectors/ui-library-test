@@ -21,7 +21,7 @@ end
 function createtemplates()
 	warn("starting menu");
 	warn("creating ui");
-	local ui = Instance.new("ScreenGui",game.CoreGui);
+	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
 	ui.Name = "Vect0rs hub";
 	ui.ResetOnSpawn = false;
 	print("successfully  created "..ui.Name.. "'s ui!");
@@ -109,6 +109,8 @@ function createtemplates()
 	buttontemplatebutton.TextSize = 17;
 	buttontemplatebutton.Font = "SourceSans";
 	buttontemplatebutton.TextXAlignment = "Left"
+	
+	-- multiple 
 	
 	-- window template
 	local windowtemplateframe = Instance.new("Frame",templatesfolder);
