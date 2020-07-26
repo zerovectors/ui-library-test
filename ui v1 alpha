@@ -110,7 +110,39 @@ function createtemplates()
 	buttontemplatebutton.Font = "SourceSans";
 	buttontemplatebutton.TextXAlignment = "Left"
 	
-	-- multiple 
+	-- multiple options template
+	local multipleoptionstemplateframe = Instance.new("Frame", templatesfolder);
+	multipleoptionstemplateframe.Name = "Template Multiple options";
+	multipleoptionstemplateframe.BackgroundColor3 = Color3.fromRGB(18,18,18);
+	multipleoptionstemplateframe.Position = UDim2.new(0, 0,0, 0);
+	multipleoptionstemplateframe.Size = UDim2.new(0, 271,0, 619);
+	multipleoptionstemplateframe.BackgroundTransparency = 1;
+	multipleoptionstemplateframe.Visible = false;
+	local uilistlayout = Instance.new("UIListLayout", multipleoptionstemplateframe);
+	local options = Instance.new("Frame", multipleoptionstemplateframe);
+	options.Name = "Options";
+	options.Size = UDim2.new(0, 271,0, 258);
+	options.BackgroundTransparency = 1;
+	options.ClipsDescendants = true;
+	local uilistlayout = Instance.new("UIListLayout", options)
+	uilistlayout.SortOrder = "LayoutOrder"
+	local namee = Instance.new("TextLabel", multipleoptionstemplateframe);
+	namee.Size = UDim2.new(0, 271,0, 31);
+	namee.Name = "Namee";
+	namee.BackgroundColor3 = Color3.fromRGB(18, 18, 18);
+	namee.TextColor3 = Color3.fromRGB(255,255,255);
+	namee.Font = "SourceSansBold";
+	namee.TextSize = 18
+	namee.TextXAlignment = "Left";
+	local toggle = Instance.new("TextButton", namee);
+	toggle.TextSize = 25
+	toggle.Name = "toggle"
+	toggle.Text = "-"
+	toggle.TextColor3 = Color3.fromRGB(255,255,255);
+	toggle.BackgroundTransparency = 1;
+	toggle.Position = UDim2.new(0.834, 0,-0.161, 0);
+	toggle.Size = UDim2.new(0, 44,0, 41);
+	toggle.Font = "SourceSans";
 	
 	-- window template
 	local windowtemplateframe = Instance.new("Frame",templatesfolder);
@@ -133,7 +165,7 @@ function createtemplates()
 	title.Position = UDim2.new(-0.002, 0,-0.002, 0)
 	title.BackgroundColor3 = Color3.fromRGB(35,35,35);
 	title.BorderSizePixel = 0;
-	title.Font = "SourceSans";
+	title.Font = "SourceSansBold";
 	title.TextSize = 18;
 	title.TextColor3 = Color3.fromRGB(255,255,255);
 	title.Name = "Title";
@@ -161,8 +193,6 @@ warn("creating ui options");
 	-- main shit
 local visuals=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
 visuals.Name="Visuals"
-local newwindow=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
-newwindow.Name="test"
 local character=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
 character.Name="Character"
 
@@ -176,6 +206,10 @@ local visualsbuttonoptions=Instance.new("Folder", visualsoptions)
 visualsbuttonoptions.Name = "Button Options"
 local visualslabeloptions=Instance.new("Folder", visualsoptions)
 visualslabeloptions.Name = "Label Options"
+local espoptions = Instance.new("Folder",visualsoptions)
+espoptions.Name = "Esp options"
+local espoptionsoptions = Instance.new("Folder",espoptions)
+espoptionsoptions.Name = "ESP Options"
 -- character options
 local characteroptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
 characteroptions.Name = "Character Options"
@@ -185,11 +219,6 @@ local characterbuttonoptions=Instance.new("Folder", characteroptions)
 characterbuttonoptions.Name = "Button Options"
 local characterlabeloptions=Instance.new("Folder", characteroptions)
 characterlabeloptions.Name = "Label Options"
---testing ignore
-local multipleoptions = Instance.new("Folder",characteroptions)
-multipleoptions.Name = "Multiple Options"
-local multipleoptionsoptions = Instance.new("Folder",multipleoptions)
-multipleoptionsoptions.Name = "Test"
 
 
 function setupui()
@@ -247,20 +276,20 @@ function setupui()
 		button.Name=v.Name;
 		button:WaitForChild("Label").Text=v.Name;
 	end
---[[	for i,v in pairs(multipleoptions:GetChildren()) do
+	for i,v in pairs(espoptions:GetChildren()) do
 		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Multiple options"]:Clone();
-		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
 		button.Visible=true;
 		button.Name=v.Name;
 		button.Namee.Text = v.Name; 
 	end
-	for i,v in pairs(multipleoptionsoptions:GetChildren()) do
+	for i,v in pairs(espoptionsoptions:GetChildren()) do
 		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
-		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test.Options;
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options;
 		togglebutton.Visible=true;
 		togglebutton.Name=v.Name;
 		togglebutton:WaitForChild("Name").Text=v.Name;
-	end]]
+	end
 end
 
 --[[	--- options u can add ---
@@ -289,10 +318,12 @@ vehiclefly.Name = "Vehicle Fly"
 local noclip = Instance.new("Folder", charactertogglebuttonoptions)
 noclip.Name = "Noclip"
 
-local option1 = Instance.new("Folder",multipleoptionsoptions)
-option1.Name = "option 1 test"
-local option2 = Instance.new("Folder",multipleoptionsoptions)
-option2.Name = "option 2 test"
+local esp = Instance.new("Folder",espoptionsoptions)
+esp.Name = "ESP"
+local chams = Instance.new("Folder",espoptionsoptions)
+chams.Name = "Chams"
+local tracers = Instance.new("Folder", espoptionsoptions)
+tracers.Name = "Tracers"
 setupui()
 
 function tweening()
@@ -494,6 +525,7 @@ end
 	
 function fullbright()
 		if settings.fullbright then
+		warn("fullbright enabled")
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.TextColor3 = settings.on
 		local bloom = Instance.new("BloomEffect");
@@ -514,7 +546,8 @@ function fullbright()
 		sunrays.Intensity = 0.4;
 		sunrays.Spread = 1;
 		sunrays.Parent = game.Lighting;
-	else
+		else
+		warn("fullbright disabled")
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.TextColor3 = settings.off
 		for i,v in pairs(game.Lighting:GetChildren()) do
@@ -524,8 +557,27 @@ function fullbright()
 		end
 	end
 end
+	
+	
+-- frame adjust shit dont touch
+function calculatetestToScale(dir,scale)
+    local num = 31;
+    local scaleToFrame = scale;
+    for i,v in pairs(dir:GetChildren()) do
+        if v.ClassName ~= "UIListLayout" then
+            num = num + scaleToFrame;
+        end
+    end
+    return num;
+end
 
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Size = UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options,31))
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Size = UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"],46))	
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection.Size = UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection,50))	
+
+	
 -- toggle stuff
+	-- visuals
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Title.toggle.MouseButton1Down:Connect(function()
 	settings.visualopen = not settings.visualopen
 	if settings.visualopen then
@@ -538,7 +590,21 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 		--tweening()
 	end
 end)
-
+	
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Namee.toggle.MouseButton1Down:Connect(function()
+	settings.testopen = not settings.testopen
+	if settings.testopen then
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options:TweenSize(UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options,31)), "Out", "Linear", .2, true)
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"]:TweenSize(UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"],46)), "Out", "Linear", .2, true)
+		--tweening()
+	else
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options:TweenSize(UDim2.new(0, 271,0, 0), "Out", "Linear", .2, true)
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"]:TweenSize(UDim2.new(0, 271,0, 30), "Out", "Linear", .2, true)
+		--tweening()
+	end
+end)
+	
+-- character stuff
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Title.toggle.MouseButton1Down:Connect(function()
 	settings.characteropen = not settings.characteropen
 	if settings.characteropen then
@@ -552,16 +618,6 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 	end
 end)
 
---[[game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test.Namee.toggle.MouseButton1Down:Connect(function()
-	settings.testopen = not settings.testopen
-	if settings.testopen then
-		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test:TweenSize(UDim2.new(0, 271,0, 619), "Out", "Linear", .2, true)
-		--tweening()
-	else
-		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection.Test:TweenSize(UDim2.new(0, 271,0, 29), "Out", "Linear", .2, true)
-		--tweening()
-	end
-end)]]
 
 -- main
 
@@ -603,12 +659,13 @@ end)
 
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.MouseButton1Down:Connect(function()
 	settings.vfly = not settings.vfly
-	warn(settings.vfly)
 	if settings.vfly then
+		warn("fly enabled")
 		sFLY()
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.TextColor3 = settings.on
 	else
+		warn("fly disabled")
 		NOFLY()
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Fly"].Toggle.TextColor3 = settings.off
@@ -617,12 +674,13 @@ end)
 	
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.MouseButton1Down:Connect(function()
 	settings.vfly = not settings.vfly
-	warn(settings.vfly)
 	if settings.vfly then
+		warn("vfly enabled")
 		sFLY(true)
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.TextColor3 = settings.on
 	else
+		warn("vfly disabled")
 		NOFLY()
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Vehicle Fly"].Toggle.TextColor3 = settings.off
@@ -631,8 +689,8 @@ end)
 
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.MouseButton1Down:Connect(function()
 	settings.noclip = not settings.noclip
-	warn(settings.noclip)
 	if settings.noclip then
+		warn("noclip enabled")
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.TextColor3 = settings.on
 		local function NoclipLoop()
@@ -646,6 +704,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 		    end
 			Noclipping = game:GetService('RunService').Stepped:connect(NoclipLoop)
 	else
+		warn("noclip disabled")
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.TextColor3 = settings.off
 			if Noclipping then
