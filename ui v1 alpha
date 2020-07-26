@@ -489,6 +489,39 @@ function NOFLY()
 	settings.vfly = false
 	game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
 end
+	
+function fullbright()
+		if settings.fullbright then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.TextColor3 = settings.on
+		local bloom = Instance.new("BloomEffect");
+		bloom.Enabled = true;
+		bloom.Intensity = 0.55;
+		bloom.Size = 30;
+		bloom.Threshold = 0.95;
+		bloom.Parent = game.Lighting;
+		local colorcorrection = Instance.new("ColorCorrectionEffect");
+		colorcorrection.Enabled = true;
+		colorcorrection.Brightness = 0;
+		colorcorrection.Contrast = 0;
+		colorcorrection.Saturation = 1;
+		colorcorrection.TintColor = Color3.fromRGB(255,255,255);
+		colorcorrection.Parent = game.Lighting;
+		local sunrays = Instance.new("SunRaysEffect");
+		sunrays.Enabled = true;
+		sunrays.Intensity = 0.4;
+		sunrays.Spread = 1;
+		sunrays.Parent = game.Lighting;
+	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.TextColor3 = settings.off
+		for i,v in pairs(game.Lighting:GetChildren()) do
+			if v:IsA("BloomEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
+				v:Destroy();
+			end
+		end
+	end
+end
 
 -- toggle stuff
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Title.toggle.MouseButton1Down:Connect(function()
@@ -531,7 +564,11 @@ end)]]
 -- main
 
 --visual shit
-
+	
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["FullBright"].Toggle.MouseButton1Down:Connect(function()
+	settings.fullbright = not settings.fullbright;
+	fullbright();
+end)
 
 -- character shit
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Super Jump"].Toggle.MouseButton1Down:Connect(function()
@@ -623,7 +660,8 @@ mousebuttonscriptshit();
 
 -- colour shit
 game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
-
+--[[
 local frames = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe
 local visual = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Selection:GetDescendants()
 local character = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Selection:GetDescendants()
+]]
