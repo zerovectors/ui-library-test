@@ -1,7 +1,27 @@
-function startMenu()
+-- settings
+local settings = {
+	fullbright = false;
+	superjump = false;
+	superspeed = false;
+	linecolor = Color3.fromRGB(221, 3, 255);
+	on = Color3.fromRGB(221, 3, 255);
+	off = Color3.fromRGB(255,255,255);
+	visualopen = true;
+	characteropen = true;
+	vfly = false;
+	noclip = false;
+	testopen = true;
+}
+local mouse = game.Players.LocalPlayer:GetMouse();
+local TweenService = game:GetService("TweenService")
+local function Tween(Object, Property, Style, Direction, Time)
+    return TweenService:Create(Object, TweenInfo.new(Time, Enum.EasingStyle[Style], Enum.EasingDirection[Direction]), Property):Play()
+end
+
+function createtemplates()
 	warn("starting menu");
 	warn("creating ui");
-	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
+	local ui = Instance.new("ScreenGui",game.CoreGui);
 	ui.Name = "Vect0rs hub";
 	ui.ResetOnSpawn = false;
 	print("successfully  created "..ui.Name.. "'s ui!");
@@ -132,8 +152,10 @@ function startMenu()
 	togglebutton.Position = UDim2.new(0.838, 0,0, 0);
 	print("successfully created templates!");
 	print("menu successfully started!");
-	
-	warn("creating ui options");
+end;
+
+function createuioptions()
+warn("creating ui options");
 	-- main shit
 local visuals=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
 visuals.Name="Visuals"
@@ -249,22 +271,6 @@ end
 	-
 ]]
 
--- settings
-local settings = {
-	fullbright = false;
-	superjump = false;
-	superspeed = false;
-	linecolor = Color3.fromRGB(221, 3, 255);
-	on = Color3.fromRGB(221, 3, 255);
-	off = Color3.fromRGB(255,255,255);
-	visualopen = true;
-	characteropen = true;
-	vfly = false;
-	noclip = false;
-	testopen = true;
-}
--- colour shit
-game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
 
 --visuals
 local fullbright = Instance.new("Folder", visualstogglebuttonoptions)
@@ -286,15 +292,6 @@ option1.Name = "option 1 test"
 local option2 = Instance.new("Folder",multipleoptionsoptions)
 option2.Name = "option 2 test"
 setupui()
-
-local mouse = game.Players.LocalPlayer:GetMouse();
-local frames = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe
-local TweenService = game:GetService("TweenService")
-local function Tween(Object, Property, Style, Direction, Time)
-    return TweenService:Create(Object, TweenInfo.new(Time, Enum.EasingStyle[Style], Enum.EasingDirection[Direction]), Property):Play()
-end
-local visual = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Selection:GetDescendants()
-local character = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Selection:GetDescendants()
 
 function tweening()
 	if settings.visualopen then
@@ -376,7 +373,11 @@ function tweening()
 		end		
 	end
 end
--- script shit
+print("successfully created ui options!")
+end;
+
+function mousebuttonscriptshit()
+	-- script shit
 
 -- functions
 vflyspeed = 1
@@ -612,7 +613,17 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 		      		Noclipping:Disconnect()
 			end
 		end
-	end)
-	print("successfully created ui options!")
-end
-startMenu()
+end)
+end;
+
+
+createtemplates();
+createuioptions();
+mousebuttonscriptshit();
+
+-- colour shit
+game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
+
+local frames = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe
+local visual = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Selection:GetDescendants()
+local character = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Character').Selection:GetDescendants()
