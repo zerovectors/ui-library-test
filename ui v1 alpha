@@ -3,6 +3,7 @@ function startMenu()
 	warn("creating ui");
 	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
 	ui.Name = "Vect0rs hub";
+	ui.ResetOnSpawn = false;
 	print("successfully  created "..ui.Name.. "'s ui!");
 	warn("creating mainframe");
 	local mainframe = Instance.new("Frame", ui);
@@ -595,7 +596,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Noclip"].Toggle.TextColor3 = settings.on
 		local function NoclipLoop()
-	      if settings.noclip == false and game.Players.LocalPlayer.Character ~= nil then
+	      if settings.noclip == true and game.Players.LocalPlayer.Character ~= nil then
 	          for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
 	          		if child:IsA("BasePart") and child.CanCollide == true then
 	              		child.CanCollide = false
