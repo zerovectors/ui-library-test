@@ -16,7 +16,6 @@ local settings = {
   	CHAMSEnabled = false,
 	CHAMSLength = 500,
 	MobChams = false,
-	CHAMSEnabled = false;
 	Blacklist = { },
   	FriendList = { },
   	Colors = {
