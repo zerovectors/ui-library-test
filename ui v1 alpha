@@ -1295,7 +1295,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 	fullbright();
 end)
 	
-game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.MouseButton1Down:Connect(function()
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.MouseButton1Down:Connect(function()
 	settings.CHAMSEnabled = not settings.CHAMSEnabled
 	if settings.CHAMSEnabled then
 		for _, v in next, Plrs:GetPlayers() do
