@@ -3,7 +3,6 @@ local settings = {
 	fullbright = false;
 	superjump = false;
 	superspeed = false;
-	linecolor = Color3.fromRGB(221, 3, 255);
 	on = Color3.fromRGB(221, 3, 255);
 	off = Color3.fromRGB(255,255,255);
 	visualopen = true;
@@ -11,7 +10,14 @@ local settings = {
 	vfly = false;
 	noclip = false;
 	testopen = true;
-}
+};
+local coloursettings = {
+	linecolor = Color3.fromRGB(221, 3, 255);
+	togglebuttoncolor = Color3.fromRGB(35, 35, 35);
+	buttoncolor = Color3.fromRGB(35, 35, 35);
+	labelcolor = Color3.fromRGB(35, 35, 35);
+	hotkeybuttoncolor = Color3.fromRGB(35, 35, 35);
+};
 local mouse = game.Players.LocalPlayer:GetMouse();
 local TweenService = game:GetService("TweenService")
 local function Tween(Object, Property, Style, Direction, Time)
@@ -125,7 +131,7 @@ function createtemplates()
 	options.BackgroundTransparency = 1;
 	options.ClipsDescendants = true;
 	local uilistlayout = Instance.new("UIListLayout", options)
-	uilistlayout.SortOrder = "LayoutOrder"
+	uilistlayout.SortOrder = "Name"
 	local namee = Instance.new("TextLabel", multipleoptionstemplateframe);
 	namee.Size = UDim2.new(0, 271,0, 31);
 	namee.Name = "Namee";
@@ -160,6 +166,7 @@ function createtemplates()
 	selection.Size = UDim2.new(0, 271,0, 130);
 	selection.Position = UDim2.new(-0.004, 0,0.087, 0)
 	local uilistlayout = Instance.new("UIListLayout", selection);
+	uilistlayout.SortOrder = "LayoutOrder"
 	local title = Instance.new("TextLabel", windowtemplateframe);
 	title.Size = UDim2.new(0, 271,0, 41);
 	title.Position = UDim2.new(-0.002, 0,-0.002, 0)
@@ -407,6 +414,14 @@ function tweening()
 	end
 end
 print("successfully created ui options!")
+end;
+
+function colourshit()
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Window"].Line.BackgroundColor3 = coloursettings.linecolor;
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Button"].BackgroundColor3 = coloursettings.buttoncolor;
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Toggle Button"].BackgroundColor3 = coloursettings.togglebuttoncolor;
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Label"].BackgroundColor3 = coloursettings.labelcolor;
+	--game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Hotkey Button"].BackgroundColor3 = coloursettings.hotkeybuttoncolor;
 end;
 
 function mousebuttonscriptshit()
@@ -715,9 +730,8 @@ end)
 end;
 
 
+-- loader --
 createtemplates();
+colourshit();
 createuioptions();
 mousebuttonscriptshit();
-
--- colour shit
-game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Window"].Line.BackgroundColor3 = settings.linecolor
