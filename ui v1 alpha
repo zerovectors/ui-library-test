@@ -181,6 +181,7 @@ function createtemplates()
 	namee.Size = UDim2.new(0, 63,0, 18);
 	namee.Position = UDim2.new(0.022, 0,0.2, 0);
 	namee.Font = "SourceSans";
+	namee.TextXAlignment = "Left"
 	local value = Instance.new("TextLabel", slidertemplateframe);
 	value.Name = "Value";
 	value.BackgroundTransparency = 1;
@@ -271,6 +272,14 @@ local espoptions = Instance.new("Folder",visualsoptions)
 espoptions.Name = "Esp options"
 local espoptionsoptions = Instance.new("Folder",espoptions)
 espoptionsoptions.Name = "ESP Options"
+local espoptionstogglebuttonoptions=Instance.new("Folder", espoptionsoptions)
+espoptionstogglebuttonoptions.Name = "Toggle Options"
+local espoptionsbuttonoptions=Instance.new("Folder", espoptionsoptions)
+espoptionsbuttonoptions.Name = "Button Options"
+local espoptionslabeloptions=Instance.new("Folder", espoptionsoptions)
+espoptionslabeloptions.Name = "Label Options"
+local espoptionsslideroptions = Instance.new("Folder",espoptionsoptions);
+espoptionsslideroptions.Name = "Slider Options"
 -- character options
 local characteroptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
 characteroptions.Name = "Character Options"
@@ -324,12 +333,26 @@ function setupui()
 		button.Name=v.Name;
 		button.Namee.Text = v.Name; 
 	end
-	for i,v in pairs(espoptionsoptions:GetChildren()) do
+	for i,v in pairs(espoptionstogglebuttonoptions:GetChildren()) do
 		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
 		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options;
 		togglebutton.Visible=true;
 		togglebutton.Name=v.Name;
 		togglebutton:WaitForChild("Name").Text=v.Name;
+	end
+	for i,v in pairs(espoptionslabeloptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Label"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Name").Text=v.Name;
+	end
+	for i,v in pairs(espoptionsslideroptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Slider"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Namee").Text=v.Name;
 	end
 	--chartacter
 	for i,v in pairs(charactertogglebuttonoptions:GetChildren()) do
@@ -376,11 +399,11 @@ end
 --visuals
 local fullbright = Instance.new("Folder", visualstogglebuttonoptions)
 fullbright.Name = "FullBright"
-local esp = Instance.new("Folder",espoptionsoptions)
+local esp = Instance.new("Folder",espoptionstogglebuttonoptions)
 esp.Name = "ESP"
-local chams = Instance.new("Folder",espoptionsoptions)
+local chams = Instance.new("Folder",espoptionstogglebuttonoptions)
 chams.Name = "Chams"
-local tracers = Instance.new("Folder", espoptionsoptions)
+local tracers = Instance.new("Folder", espoptionstogglebuttonoptions)
 tracers.Name = "Tracers"
 -- character
 local superjump = Instance.new("Folder", charactertogglebuttonoptions)
