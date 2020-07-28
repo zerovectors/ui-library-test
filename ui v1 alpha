@@ -21,10 +21,9 @@ local settings = {
  	FriendList = { };
   	Colors = {
 	    Enemy = Color3.new(1, 0, 0);
-	    Ally = Color3.new(0, 1, 0);
-	    Friend = Color3.new(1, 1, 0);
-	    Neutral = Color3.new(1, 1, 1);
-	    Crosshair = Color3.new(1, 0, 0);
+	    Ally = Color3.fromRGB(221, 3, 255);
+	    Friend = Color3.fromRGB(221, 3, 255);
+	    Neutral = Color3.fromRGB(255,255,255);
 	    ColorOverride = nil;
   	},
   	CharAddedEvent = { };
@@ -1334,7 +1333,6 @@ function CreateChams(Obj)
 	end
 end
 	
-
 	
 -- frame adjust shit dont touch
 function calculatetestToScale(dir,scale)
