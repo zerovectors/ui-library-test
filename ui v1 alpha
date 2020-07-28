@@ -816,7 +816,7 @@ function GetTeamColor(Plr)
 							elseif Plr.Team.Name == "Criminals" then
 								PickedColor = settings.Colors.Enemy
 							elseif Plr.Team.Name == "Guards" then
-								PickColor = settings.Colors.Ally
+								PickedColor = settings.Colors.Ally
 							end
 						elseif MyPlr.Team.Name == "Criminals" then
 							if Plr.Team.Name == "Inmates" then
