@@ -10,24 +10,24 @@ local settings = {
 	vfly = false;
 	noclip = false;
 	testopen = true;
-	TracersEnabled = false, -- Self explanatory. LEAVE OFF BY DEFAULT.
-  	TracersLength = 500, -- MAX DISTANCE IS 2048 DO NOT GO ABOVE OR YOU'LL ENCOUNTER PROBLEMS.
-  	PlaceTracersUnderCharacter = false,
-  	CHAMSEnabled = false,
-	CHAMSLength = 500,
-	MobChams = false,
-  	Blacklist = { },
- 	FriendList = { },
+	TracersEnabled = false;
+  	TracersLength = 500;
+  	PlaceTracersUnderCharacter = false;
+  	CHAMSEnabled = false;
+	CHAMSLength = 500;
+	MobChams = false;
+  	Blacklist = { };
+ 	FriendList = { };
   	Colors = {
-	    Enemy = Color3.new(1, 0, 0),
-	    Ally = Color3.new(0, 1, 0),
-	    Friend = Color3.new(1, 1, 0),
-	    Neutral = Color3.new(1, 1, 1),
-	    Crosshair = Color3.new(1, 0, 0),
-	    ColorOverride = nil, -- Every player will have the chosen color regardless of enemy or ally.
+	    Enemy = Color3.new(1, 0, 0);
+	    Ally = Color3.new(0, 1, 0);
+	    Friend = Color3.new(1, 1, 0);
+	    Neutral = Color3.new(1, 1, 1);
+	    Crosshair = Color3.new(1, 0, 0);
+	    ColorOverride = nil;
   	},
-  	CharAddedEvent = { },
-	Mob_ESP_CHAMS_Ran_Once = false,
+  	CharAddedEvent = { };
+	Mob_ESP_CHAMS_Ran_Once = false;
 };
 local coloursettings = {
 	linecolor = Color3.fromRGB(221, 3, 255);
@@ -39,47 +39,47 @@ local coloursettings = {
 };
 function GetCamera()
 	return workspace:FindFirstChildOfClass("Camera")
-end
+end;
 
 local mouse = game.Players.LocalPlayer:GetMouse();
-local TweenService = game:GetService("TweenService")
-local Plrs = game.Players
-local MyPlr = Plrs.LocalPlayer
-local MyChar = MyPlr.Character
-local MyMouse = MyPlr:GetMouse()
-local MyCam = GetCamera()
-local char = game.Players.LocalPlayer.Character
-local Plrs = game:GetService("Players")
-local Run = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
-local StartGui = game:GetService("StarterGui")
-local Teams = game:GetService("Teams")
-local UserInput = game:GetService("UserInputService")
-local Light = game:GetService("Lighting")
-local HTTP = game:GetService("HttpService")
-local RepStor = game:GetService("ReplicatedStorage")
-local MyCam = GetCamera()
+local TweenService = game:GetService("TweenService");
+local Plrs = game.Players;
+local MyPlr = Plrs.LocalPlayer;
+local MyChar = MyPlr.Character;
+local MyMouse = MyPlr:GetMouse();
+local MyCam = GetCamera();
+local char = game.Players.LocalPlayer.Character;
+local Plrs = game:GetService("Players");
+local Run = game:GetService("RunService");
+local CoreGui = game:GetService("CoreGui");
+local StartGui = game:GetService("StarterGui");
+local Teams = game:GetService("Teams");
+local UserInput = game:GetService("UserInputService");
+local Light = game:GetService("Lighting");
+local HTTP = game:GetService("HttpService");
+local RepStor = game:GetService("ReplicatedStorage");
+local MyCam = GetCamera();
 if MyCam == nil then
 	return
-end
-local Tracers = Instance.new("Folder", MyCam)
-	Tracers.Name = "Tracers"
-	local TracerData = { }
+end;
+local Tracers = Instance.new("Folder", MyCam);
+	Tracers.Name = "Tracers";
+	local TracerData = { };
 	local TracerMT = setmetatable(TracerData, {
 		__newindex = function(tab, index, val)
 			rawset(tab, index, val)
 		end
-})
+});
 
-local ChamsFolder = Instance.new("Folder", CoreGui)
-ChamsFolder.Name = "Chams"
-local PlayerChams = Instance.new("Folder", ChamsFolder)
-PlayerChams.Name = "PlayerChams"
-local ItemChams = Instance.new("Folder", ChamsFolder)
-ItemChams.Name = "ItemChams"
+local ChamsFolder = Instance.new("Folder", CoreGui);
+ChamsFolder.Name = "Chams";
+local PlayerChams = Instance.new("Folder", ChamsFolder);
+PlayerChams.Name = "PlayerChams";
+local ItemChams = Instance.new("Folder", ChamsFolder);
+ItemChams.Name = "ItemChams";
 local function Tween(Object, Property, Style, Direction, Time)
     return TweenService:Create(Object, TweenInfo.new(Time, Enum.EasingStyle[Style], Enum.EasingDirection[Direction]), Property):Play()
-end
+end;
 
 function createtemplates()
 	warn("starting menu");
@@ -1305,6 +1305,8 @@ end)
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.MouseButton1Down:Connect(function()
 	settings.CHAMSEnabled = not settings.CHAMSEnabled
 	if settings.CHAMSEnabled then
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.Text = "ON"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.TextColor3 = settings.on
 		for _, v in next, Plrs:GetPlayers() do
 			if v ~= MyPlr then
 				if settings.CharAddedEvent[v.Name] == nil then
@@ -1323,6 +1325,8 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 		end
 		CreateMobESPChams()
 	else
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.Text = "OFF"
+		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.TextColor3 = settings.off
 		PlayerChams:ClearAllChildren()
 		ItemChams:ClearAllChildren()
 	end
