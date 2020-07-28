@@ -91,7 +91,7 @@ end;
 function createtemplates()
 	warn("starting menu");
 	warn("creating ui");
-	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
+	local ui = Instance.new("ScreenGui",CoreGui);
 	ui.Name = "Vect0rs hub";
 	ui.ResetOnSpawn = false;
 	print("successfully  created "..ui.Name.. "'s ui!");
@@ -1408,6 +1408,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 	if settings.CHAMSEnabled then
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.Text = "ON"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.TextColor3 = settings.on
+		warn("chams enabled")
 		for _, v in next, Plrs:GetPlayers() do
 			if v ~= MyPlr then
 				if settings.CharAddedEvent[v.Name] == nil then
@@ -1427,6 +1428,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 	else
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.TextColor3 = settings.off
+		warn("chams disabled")
 		PlayerChams:ClearAllChildren()
 		ItemChams:ClearAllChildren()
 	end
@@ -1435,6 +1437,7 @@ end)
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.MouseButton1Down:Connect(function()
   settings.TracersEnabled = not settings.TracersEnabled
 	if settings.TracersEnabled then
+		warn("tracers enabled")
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.Text = "ON"
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.TextColor3= settings.on
 	    for _, v in next, Plrs:GetPlayers() do
@@ -1458,6 +1461,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 	      end
 	    end
 	else
+	warn("tracers disabled")
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.Text = "OFF"
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.TextColor3= settings.off
 	    for _, v in next, Plrs:GetPlayers() do
@@ -1469,6 +1473,7 @@ end)
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.MouseButton1Down:Connect(function()
 		settings.ESPEnabled = not settings.ESPEnabled
 		if settings.ESPEnabled then
+			warn("esp enabled")
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.Text = "ON"
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.TextColor3 = settings.on
 			for _, v in next, Plrs:GetPlayers() do
@@ -1488,6 +1493,7 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 				end
 			end
 		else
+			warn("esp disabled")
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.Text = "OFF"
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.TextColor3 = settings.off
 			PlayerESP:ClearAllChildren()
