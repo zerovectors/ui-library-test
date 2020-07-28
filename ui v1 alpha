@@ -71,7 +71,7 @@ local Tracers = Instance.new("Folder", MyCam);
 		end
 });
 
-local ChamsFolder = Instance.new("Folder", CoreGui);
+local ChamsFolder = Instance.new("Folder", game.Players.LocalPlayer.PlayerGui);
 ChamsFolder.Name = "Chams";
 local PlayerChams = Instance.new("Folder", ChamsFolder);
 PlayerChams.Name = "PlayerChams";
@@ -1334,32 +1334,36 @@ end)
 	
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.MouseButton1Down:Connect(function()
   settings.TracersEnabled = not settings.TracersEnabled
-  if settings.TracersEnabled then
-    for _, v in next, Plrs:GetPlayers() do
-      if v ~= MyPlr then
-        if settings.CharAddedEvent[v.Name] == nil then
-          settings.CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
-            if settings.TracersEnabled then
-              RemoveTracers(v)
-              CreateTracers(v)
-            end
-          end)
-        end
-        if v.Character ~= nil then
-          local Tor = v.Character:FindFirstChild("HumanoidRootPart")
-          if Tor then
-            TracerMT[v.Name] = Tor
-          end
-        end
-        RemoveTracers(v)
-        CreateTracers(v)
-      end
-    end
-  else
-    for _, v in next, Plrs:GetPlayers() do
-      RemoveTracers(v)
-    end
-  end
+	if settings.TracersEnabled then
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.Text = "ON"
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.TextColor3= settings.on
+	    for _, v in next, Plrs:GetPlayers() do
+	      if v ~= MyPlr then
+	        if settings.CharAddedEvent[v.Name] == nil then
+	          settings.CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
+	            if settings.TracersEnabled then
+	              RemoveTracers(v)
+	              CreateTracers(v)
+	            end
+	          end)
+	        end
+	        if v.Character ~= nil then
+	          local Tor = v.Character:FindFirstChild("HumanoidRootPart")
+	          if Tor then
+	            TracerMT[v.Name] = Tor
+	          end
+	        end
+	        RemoveTracers(v)
+	        CreateTracers(v)
+	      end
+	    end
+	else
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.Text = "OFF"
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Tracers.Toggle.TextColor3= settings.off
+	    for _, v in next, Plrs:GetPlayers() do
+	      RemoveTracers(v)
+	    end
+	  end
 end)
 
 -- character shit
