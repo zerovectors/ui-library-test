@@ -2,14 +2,15 @@
 local settings = {
 	fullbright = false;
 	superjump = false;
-	superspeed = false;
+    superspeed = false;
+    gravity = false;
 	on = Color3.fromRGB(221, 3, 255);
 	off = Color3.fromRGB(255,255,255);
 	visualopen = true;
 	characteropen = true;
 	vfly = false;
 	noclip = false;
-	testopen = true;
+	espoptionstoggle = true;
 	TracersEnabled = false;
   	PlaceTracersUnderCharacter = false;
 	CHAMSEnabled = false;
@@ -71,14 +72,14 @@ local Tracers = Instance.new("Folder", MyCam);
 		end
 });
 
-local ChamsFolder = Instance.new("Folder", CoreGui);
+local ChamsFolder = Instance.new("Folder", game.Players.LocalPlayer.PlayerGui);
 ChamsFolder.Name = "Chams";
 local PlayerChams = Instance.new("Folder", ChamsFolder);
 PlayerChams.Name = "PlayerChams";
 local ItemChams = Instance.new("Folder", ChamsFolder);
 ItemChams.Name = "ItemChams";
 
-local ESPFolder = Instance.new("Folder", CoreGui)
+local ESPFolder = Instance.new("Folder", game.Players.LocalPlayer.PlayerGui)
 ESPFolder.Name = "ESP Stuff"
 local PlayerESP = Instance.new("Folder", ESPFolder)
 PlayerESP.Name = "PlayerESP"
@@ -91,7 +92,7 @@ end;
 function createtemplates()
 	warn("starting menu");
 	warn("creating ui");
-	local ui = Instance.new("ScreenGui",CoreGui);
+	local ui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui);
 	ui.Name = "Vect0rs hub";
 	ui.ResetOnSpawn = false;
 	print("successfully  created "..ui.Name.. "'s ui!");
@@ -101,9 +102,10 @@ function createtemplates()
 	mainframe.Size = UDim2.new(0, 1655,0, 804);
 	mainframe.Position = UDim2.new(0.15, 0,0.013, 0)
 	mainframe.BackgroundTransparency = 1;
-	local uilistlayout = Instance.new("UIListLayout", mainframe)
-	uilistlayout.FillDirection = "Horizontal"
-	uilistlayout.Padding = UDim.new(0,10)
+	local uilistlayout = Instance.new("UIListLayout", mainframe);
+    uilistlayout.FillDirection = "Horizontal";
+    uilistlayout.SortOrder = "Name";
+	uilistlayout.Padding = UDim.new(0,10);
 	print("successfully  created mainframe!");
 	warn("creating folders");
 	local windowsfolder = Instance.new("Folder", ui);
@@ -328,6 +330,8 @@ local visuals=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs
 visuals.Name="Visuals"
 local character=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
 character.Name="Character"
+local miscellaneous = Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Windows)
+miscellaneous.Name = "Miscellaneous"
 
 
 -- visual options
@@ -349,7 +353,7 @@ local espoptionsbuttonoptions=Instance.new("Folder", espoptionsoptions)
 espoptionsbuttonoptions.Name = "Button Options"
 local espoptionslabeloptions=Instance.new("Folder", espoptionsoptions)
 espoptionslabeloptions.Name = "Label Options"
-local espoptionsslideroptions = Instance.new("Folder",espoptionsoptions);
+local espoptionsslideroptions = Instance.new("Folder",espoptionsoptions)
 espoptionsslideroptions.Name = "Slider Options"
 -- character options
 local characteroptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
@@ -360,9 +364,19 @@ local characterbuttonoptions=Instance.new("Folder", characteroptions)
 characterbuttonoptions.Name = "Button Options"
 local characterlabeloptions=Instance.new("Folder", characteroptions)
 characterlabeloptions.Name = "Label Options"
-local characterslideroptions = Instance.new("Folder",characteroptions);
+local characterslideroptions = Instance.new("Folder",characteroptions)
 characterslideroptions.Name = "Slider Options"
-
+-- miscellaneous options
+local miscellaneousoptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
+miscellaneousoptions.Name = "Miscellaneous Options"
+local miscellaneoustogglebuttonoptions=Instance.new("Folder", miscellaneousoptions)
+miscellaneoustogglebuttonoptions.Name = "Toggle Options"
+local miscellaneousbuttonoptions=Instance.new("Folder", miscellaneousoptions)
+miscellaneousbuttonoptions.Name = "Button Options"
+local miscellaneouslabeloptions=Instance.new("Folder", miscellaneousoptions)
+miscellaneouslabeloptions.Name = "Label Options"
+local miscellaneousslideroptions = Instance.new("Folder",miscellaneousoptions)
+miscellaneousslideroptions.Name = "Slider Options"
 
 function setupui()
 	-- actual window tabs
@@ -453,6 +467,35 @@ function setupui()
 		button.Visible=true;
 		button.Name=v.Name;
 		button:WaitForChild("Namee").Text = v.Name;
+		end
+	--chartacter
+	for i,v in pairs(miscellaneoustogglebuttonoptions:GetChildren()) do
+		local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
+		togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+		togglebutton.Visible=true;
+		togglebutton.Name=v.Name;
+		togglebutton:WaitForChild("Name").Text=v.Name;
+	end
+	for i,v in pairs(miscellaneousbuttonoptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Button"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Button").Text=v.Name;
+	end
+	for i,v in pairs(miscellaneouslabeloptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Label"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Label").Text=v.Name;
+	end
+	for i,v in pairs(miscellaneousslideroptions:GetChildren()) do
+		local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Slider"]:Clone();
+		button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+		button.Visible=true;
+		button.Name=v.Name;
+		button:WaitForChild("Namee").Text = v.Name;
 	end
 end
 
@@ -489,6 +532,14 @@ local noclip = Instance.new("Folder", charactertogglebuttonoptions)
 noclip.Name = "Noclip"
 local walkspeed = Instance.new("Folder", characterslideroptions)
 walkspeed.Name = "WalkSpeed"
+local jumppower = Instance.new("Folder", characterslideroptions)
+jumppower.Name = "JumpPower"
+-- miscellaneous
+local gravity = Instance.new("Folder", miscellaneoustogglebuttonoptions)
+gravity.Name = "Low Gravity"
+local gravityslider = Instance.new("Folder", miscellaneousslideroptions)
+gravityslider.Name = "Gravity Slider"
+
 
 setupui()
 
@@ -1367,8 +1418,8 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 end)
 	
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Namee.toggle.MouseButton1Down:Connect(function()
-	settings.testopen = not settings.testopen
-	if settings.testopen then
+	settings.espoptionstoggle = not settings.espoptionstoggle
+	if settings.espoptionstoggle then
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options:TweenSize(UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options,31)), "Out", "Linear", .2, true)
 			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"]:TweenSize(UDim2.new(0, 271,0, calculatetestToScale(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"],46)), "Out", "Linear", .2, true)
 		--tweening()
@@ -1586,14 +1637,50 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Charac
 		end
 end)
 	
-	local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.AbsoluteWindowSize.X) * 150)
-	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value.Text = tostring(maxval * 1);
-	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value2.Text = "["..tostring(maxval * 1).."/150]";
+local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.AbsoluteWindowSize.X) * 150)
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value.Text = tostring(maxval * 1);
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value2.Text = "["..tostring(maxval * 1).."/150]";
 game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.Changed:Connect(function(c) if (c ~= "CanvasPosition") then return end
 	local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Scroller.AbsoluteWindowSize.X) * 150)
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value.Text = tostring(maxval * 1);
 	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["WalkSpeed"].Value2.Text = "["..tostring(maxval * 1).."/150]";
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = maxval * 1
+end)
+	
+local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.AbsoluteWindowSize.X) * 500)
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Value.Text = tostring(maxval * 1);
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Value2.Text = "["..tostring(maxval * 1).."/500]";
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.Changed:Connect(function(c) if (c ~= "CanvasPosition") then return end
+	local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Scroller.AbsoluteWindowSize.X) * 500)
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Value.Text = tostring(maxval * 1);
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["JumpPower"].Value2.Text = "["..tostring(maxval * 1).."/500]";
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = maxval * 1
+end)
+
+-- miscellaneous shit
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.MouseButton1Down:Connect(function()
+    settings.gravity = not settings.gravity;
+    if settings.gravity then
+        warn("low gravity enabled");
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.Text = "ON";
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.TextColor3 = settings.on
+        workspace.Gravity = 50;
+    else
+        warn("low gravity disabled");
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.Text = "OFF";
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.TextColor3 = settings.off
+        workspace.Gravity = 196;
+    end;
+end)
+
+local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.AbsoluteWindowSize.X) * 196)
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Value.Text = tostring(maxval * 1);
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Value2.Text = "["..tostring(maxval * 1).."/196]";
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.Changed:Connect(function(c) if (c ~= "CanvasPosition") then return end
+    local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Scroller.AbsoluteWindowSize.X) * 196)
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Value.Text = tostring(maxval * 1);
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Value2.Text = "["..tostring(maxval * 1).."/196]";
+    game.workspace.Gravity = maxval * 1
 end)
 end;
 
