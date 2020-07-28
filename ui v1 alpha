@@ -11,11 +11,12 @@ local settings = {
 	noclip = false;
 	testopen = true;
 	TracersEnabled = false;
-  	TracersLength = 500;
   	PlaceTracersUnderCharacter = false;
-  	CHAMSEnabled = false;
+	CHAMSEnabled = false;
+	ESPEnabled = false;
+	TracersLength = 500;
 	CHAMSLength = 500;
-	MobChams = false;
+	ESPLength = 10000,
   	Blacklist = { };
  	FriendList = { };
   	Colors = {
@@ -71,12 +72,19 @@ local Tracers = Instance.new("Folder", MyCam);
 		end
 });
 
-local ChamsFolder = Instance.new("Folder", game.Players.LocalPlayer.PlayerGui);
+local ChamsFolder = Instance.new("Folder", CoreGui);
 ChamsFolder.Name = "Chams";
 local PlayerChams = Instance.new("Folder", ChamsFolder);
 PlayerChams.Name = "PlayerChams";
 local ItemChams = Instance.new("Folder", ChamsFolder);
 ItemChams.Name = "ItemChams";
+
+local ESPFolder = Instance.new("Folder", CoreGui)
+ESPFolder.Name = "ESP Stuff"
+local PlayerESP = Instance.new("Folder", ESPFolder)
+PlayerESP.Name = "PlayerESP"
+local ItemESP = Instance.new("Folder", ESPFolder)
+ItemESP.Name = "ItemESP"
 local function Tween(Object, Property, Style, Direction, Time)
     return TweenService:Create(Object, TweenInfo.new(Time, Enum.EasingStyle[Style], Enum.EasingDirection[Direction]), Property):Play()
 end;
@@ -1001,7 +1009,141 @@ function GetTeamColor(Plr)
 
 	return PickedColor
 end
+	
+	
+function UpdateESP(Plr)
+	if Plr ~= nil then
+		local Find = PlayerESP:FindFirstChild("ESP Crap_" .. Plr.Name)
+		if Find then
+			local PickColor = GetTeamColor(Plr)
+			Find.Frame.Names.TextColor3 = PickColor
+			Find.Frame.Dist.TextColor3 = PickColor
+			Find.Frame.Health.TextColor3 = PickColor
+			--Find.Frame.Pos.TextColor3 = PickColor
+			local GetChar = Plr.Character
+			if MyChar and GetChar then
+				local Find2 = MyChar:FindFirstChild("HumanoidRootPart")
+				local Find3 = GetChar:FindFirstChild("HumanoidRootPart")
+				local Find4 = GetChar:FindFirstChildOfClass("Humanoid")
+				if Find2 and Find3 then
+					local pos = Find3.Position
+					local Dist = (Find2.Position - pos).magnitude
+					if Dist > settings.ESPLength or settings.Blacklist[Plr.Name] then
+						Find.Frame.Names.Visible = false
+						Find.Frame.Dist.Visible = false
+						Find.Frame.Health.Visible = false
+						return
+					else
+						Find.Frame.Names.Visible = true
+						Find.Frame.Dist.Visible = true
+						Find.Frame.Health.Visible = true
+					end
+					Find.Frame.Dist.Text = "Distance: " .. string.format("%.0f", Dist)
+					--Find.Frame.Pos.Text = "(X: " .. string.format("%.0f", pos.X) .. ", Y: " .. string.format("%.0f", pos.Y) .. ", Z: " .. string.format("%.0f", pos.Z) .. ")"
+					if Find4 then
+						Find.Frame.Health.Text = "Health: " .. string.format("%.0f", Find4.Health)
+					else
+						Find.Frame.Health.Text = ""
+					end
+				end
+			end
+		end
+	end
+end
 
+function RemoveESP(Obj)
+	if Obj ~= nil then
+		local IsPlr = Obj:IsA("Player")
+		local UseFolder = ItemESP
+		if IsPlr then UseFolder = PlayerESP end
+
+		local FindESP = ((IsPlr) and UseFolder:FindFirstChild("ESP Crap_" .. Obj.Name)) or FindESP(Obj)
+		if FindESP then
+			FindESP:Destroy()
+		end
+	end
+end
+
+function CreateESP(Obj)
+	if Obj ~= nil then
+		local IsPlr = Obj:IsA("Player")
+		local UseFolder = ItemESP
+		local GetChar = ((IsPlr) and Obj.Character) or Obj
+		local Head = GetChar:FindFirstChild("Head")
+		local t = tick()
+		if IsPlr then UseFolder = PlayerESP end
+		if Head == nil then
+			repeat
+				Head = GetChar:FindFirstChild("Head")
+				wait()
+			until Head ~= nil or (tick() - t) >= 10
+		end
+		if Head == nil then return end
+		
+		local bb = Instance.new("BillboardGui")
+		bb.Adornee = Head
+		bb.ExtentsOffset = Vector3.new(0, 1, 0)
+		bb.AlwaysOnTop = true
+		bb.Size = UDim2.new(0, 5, 0, 5)
+		bb.StudsOffset = Vector3.new(0, 3, 0)
+		bb.Name = "ESP Crap_" .. Obj.Name
+		bb.Parent = UseFolder
+		
+		local frame = Instance.new("Frame", bb)
+		frame.ZIndex = 10
+		frame.BackgroundTransparency = 1
+		frame.Size = UDim2.new(1, 0, 1, 0)
+		
+		local TxtName = Instance.new("TextLabel", frame)
+		TxtName.Name = "Names"
+		TxtName.ZIndex = 10
+		TxtName.Text = Obj.Name
+		TxtName.BackgroundTransparency = 1
+		TxtName.Position = UDim2.new(0, 0, 0, -45)
+		TxtName.Size = UDim2.new(1, 0, 10, 0)
+		TxtName.Font = "SourceSansBold"
+		TxtName.TextSize = 13
+		TxtName.TextStrokeTransparency = 0.5
+
+		local TxtDist = nil
+		local TxtHealth = nil
+		if IsPlr then
+			TxtDist = Instance.new("TextLabel", frame)
+			TxtDist.Name = "Dist"
+			TxtDist.ZIndex = 10
+			TxtDist.Text = ""
+			TxtDist.BackgroundTransparency = 1
+			TxtDist.Position = UDim2.new(0, 0, 0, -35)
+			TxtDist.Size = UDim2.new(1, 0, 10, 0)
+			TxtDist.Font = "SourceSansBold"
+			TxtDist.TextSize = 13
+			TxtDist.TextStrokeTransparency = 0.5
+
+			TxtHealth = Instance.new("TextLabel", frame)
+			TxtHealth.Name = "Health"
+			TxtHealth.ZIndex = 10
+			TxtHealth.Text = ""
+			TxtHealth.BackgroundTransparency = 1
+			TxtHealth.Position = UDim2.new(0, 0, 0, -25)
+			TxtHealth.Size = UDim2.new(1, 0, 10, 0)
+			TxtHealth.Font = "SourceSansBold"
+			TxtHealth.TextSize = 13
+			TxtHealth.TextStrokeTransparency = 0.5
+		else
+			local ObjVal = Instance.new("ObjectValue", bb)
+			ObjVal.Value = Obj
+		end
+		
+		local PickColor = GetTeamColor(Obj) or settings.Colors.Neutral
+		TxtName.TextColor3 = PickColor
+
+		if IsPlr then
+			TxtDist.TextColor3 = PickColor
+			TxtHealth.TextColor3 = PickColor
+		end
+	end
+end
+	
 function UpdateTracer(Plr)
 	if settings.TracersEnabled then
 		if MyChar then
@@ -1085,7 +1227,19 @@ function FindCham(Obj)
 
 	return nil
 end
+	
+function FindESP(Obj)
+	for i, v in next, ItemESP:GetChildren() do
+		if v.className == "ObjectValue" then
+			if v.Value == Obj then
+				return v.Parent
+			end
+		end
+	end
 
+	return nil
+end	
+	
 function UpdateChams(Obj)
 	if Obj == nil then return end
 
@@ -1179,59 +1333,8 @@ function CreateChams(Obj)
 		end
 	end
 end
+	
 
-function CreateMobESPChams()
-	local mobspawn = { }
-
-	for i, v in next, workspace:GetDescendants() do
-		local hum = v:FindFirstChildOfClass("Humanoid")
-		if hum and not Plrs:GetPlayerFromCharacter(hum.Parent) and FindCham(v) == nil and FindESP(v) == nil then
-			mobspawn[tostring(v.Parent)] = v.Parent
-			if settings.CHAMSEnabled and settings.MobChams then
-				CreateChams(v)
-			end
-			if settings.ESPEnabled and settings.MobESP then
-				CreateESP(v)
-			end
-		end
-	end
-
-	if settings.Mob_ESP_CHAMS_Ran_Once == false then
-		for i, v in next, mobspawn do
-			v.ChildAdded:connect(function(Obj)
-				if settings.MobChams then
-					local t = tick()
-					local GetHum = Obj:FindFirstChildOfClass("Humanoid")
-					if GetHum == nil then
-						repeat
-							GetHum = Obj:FindFirstChildOfClass("Humanoid")
-							wait()
-						until GetHum ~= nil or (tick() - t) >= 10
-					end
-					if GetHum == nil then return end
-
-					CreateChams(Obj)
-				end
-
-				if settings.MobESP then
-					local t = tick()
-					local GetHum = Obj:FindFirstChildOfClass("Humanoid")
-					if GetHum == nil then
-						repeat
-							GetHum = Obj:FindFirstChildOfClass("Humanoid")
-							wait()
-						until GetHum ~= nil or (tick() - t) >= 10
-					end
-					if GetHum == nil then return end
-
-					CreateESP(Obj)
-				end
-			end)
-		end
-
-		settings.Mob_ESP_CHAMS_Ran_Once = true
-	end
-end
 	
 -- frame adjust shit dont touch
 function calculatetestToScale(dir,scale)
@@ -1323,7 +1426,6 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 				CreateChams(v)
 			end
 		end
-		CreateMobESPChams()
 	else
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.Text = "OFF"
 		game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.Chams.Toggle.TextColor3 = settings.off
@@ -1364,6 +1466,35 @@ game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visual
 	      RemoveTracers(v)
 	    end
 	  end
+end)
+	
+game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.MouseButton1Down:Connect(function()
+		settings.ESPEnabled = not settings.ESPEnabled
+		if settings.ESPEnabled then
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.Text = "ON"
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.TextColor3 = settings.on
+			for _, v in next, Plrs:GetPlayers() do
+				if v ~= MyPlr then
+					if settings.CharAddedEvent[v.Name] == nil then
+						settings.CharAddedEvent[v.Name] = v.CharacterAdded:connect(function(Char)
+							if settings.ESPEnabled then
+								RemoveESP(v)
+								CreateESP(v)
+							end
+							repeat wait() until Char:FindFirstChild("HumanoidRootPart")
+							TracerMT[v.Name] = Char.HumanoidRootPart
+						end)
+					end
+					RemoveESP(v)
+					CreateESP(v)
+				end
+			end
+		else
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.Text = "OFF"
+			game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options.ESP.Toggle.TextColor3 = settings.off
+			PlayerESP:ClearAllChildren()
+			ItemESP:ClearAllChildren()
+		end
 end)
 
 -- character shit
@@ -1472,6 +1603,10 @@ Plrs.PlayerAdded:connect(function(Plr)
 			if settings.CHAMSEnabled then
 				CreateChams(Plr)
 			end
+			if settings.ESPEnabled then
+				RemoveESP(Plr)
+				CreateESP(Plr)
+			end
 			repeat wait() until Char:FindFirstChild("HumanoidRootPart")
 			TracerMT[Plr.Name] = Char.HumanoidRootPart
 		end)
@@ -1479,13 +1614,14 @@ Plrs.PlayerAdded:connect(function(Plr)
 end)
 
 Plrs.PlayerRemoving:connect(function(Plr)
-	ChatLog(Plr)
+	--ChatLog(Plr)
 	if settings.CharAddedEvent[Plr.Name] ~= nil then
 		settings.CharAddedEvent[Plr.Name]:Disconnect()
 		settings.CharAddedEvent[Plr.Name] = nil
 	end
 	RemoveTracers(Plr)
 	RemoveChams(Plr)
+	RemoveESP(Plr)
 	TracerMT[Plr.Name] = nil
 end)
 
