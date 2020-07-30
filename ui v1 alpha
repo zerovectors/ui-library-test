@@ -7,7 +7,8 @@ local settings = {
 	on = Color3.fromRGB(221, 3, 255);
 	off = Color3.fromRGB(255,255,255);
 	visualopen = true;
-	characteropen = true;
+    characteropen = true;
+    miscellaneousopen = true;
 	vfly = false;
 	noclip = false;
 	espoptionstoggle = true;
@@ -17,7 +18,9 @@ local settings = {
 	ESPEnabled = false;
 	TracersLength = 500;
 	CHAMSLength = 500;
-	ESPLength = 10000,
+    ESPLength = 10000;
+    flykey = "Enum.UserInputType.F";
+	vflykey = "Enum.UserInputType.V";
   	Blacklist = { };
  	FriendList = { };
   	Colors = {
@@ -35,7 +38,9 @@ local coloursettings = {
 	togglebuttoncolor = Color3.fromRGB(35, 35, 35);
 	buttoncolor = Color3.fromRGB(25, 25, 25);
 	labelcolor = Color3.fromRGB(35, 35, 35);
-	hotkeybuttoncolor = Color3.fromRGB(35, 35, 35);
+    hotkeybuttoncolor = Color3.fromRGB(25, 25, 25);
+    textboxcolor = Color3.fromRGB(30,30,30);
+    textboxtogglecolor = Color3.fromRGB(30,30,30);
 	icon = "rbxassetid://5448429554";
 };
 function GetCamera()
@@ -53,6 +58,7 @@ local char = game.Players.LocalPlayer.Character;
 local Plrs = game:GetService("Players");
 local Run = game:GetService("RunService");
 local CoreGui = game:GetService("CoreGui");
+local PlayerGui = game.Players.LocalPlayer.PlayerGui;
 local StartGui = game:GetService("StarterGui");
 local Teams = game:GetService("Teams");
 local UserInput = game:GetService("UserInputService");
@@ -72,14 +78,14 @@ local Tracers = Instance.new("Folder", MyCam);
 		end
 });
 
-local ChamsFolder = Instance.new("Folder", CoreGui);
+local ChamsFolder = Instance.new("Folder", PlayerGui);
 ChamsFolder.Name = "Chams";
 local PlayerChams = Instance.new("Folder", ChamsFolder);
 PlayerChams.Name = "PlayerChams";
 local ItemChams = Instance.new("Folder", ChamsFolder);
 ItemChams.Name = "ItemChams";
 
-local ESPFolder = Instance.new("Folder", CoreGui)
+local ESPFolder = Instance.new("Folder", PlayerGui)
 ESPFolder.Name = "ESP Stuff"
 local PlayerESP = Instance.new("Folder", ESPFolder)
 PlayerESP.Name = "PlayerESP"
@@ -227,7 +233,7 @@ function createtemplates()
 	line.Size = UDim2.new(0, 130,0, 2);
 	line.Position = UDim2.new(0.52, 0,0.451, 0);
 	line.BackgroundColor3 = Color3.fromRGB(221, 3, 255);
-	line.BorderSizePixel = 1;
+	line.BorderSizePixel = 0;
 	local scroller = Instance.new("ScrollingFrame", slidertemplateframe);
 	scroller.Name = "Scroller"
 	scroller.BackgroundTransparency = 1;
@@ -242,7 +248,8 @@ function createtemplates()
 	namee.Name = "Namee";
 	namee.BackgroundTransparency = 1;
 	namee.BorderSizePixel = 0;
-	namee.TextSize = 15;
+    namee.TextSize = 15;
+    namee.TextScaled = true;
 	namee.TextColor3 = Color3.fromRGB(255,255,255);
 	namee.Size = UDim2.new(0, 63,0, 18);
 	namee.Position = UDim2.new(0.022, 0,0.2, 0);
@@ -269,7 +276,70 @@ function createtemplates()
 	value2.Text = "[0/0]"
 	value2.Font = "SourceSans";
 	
-	
+    -- hotkey button template
+    local hotkeybuttontemplateframe = Instance.new("Frame", templatesfolder);
+    hotkeybuttontemplateframe.Name = "Template Hotkey Button";
+    hotkeybuttontemplateframe.Size = UDim2.new(0, 271,0, 31);
+    hotkeybuttontemplateframe.Visible = false;
+    hotkeybuttontemplateframe.BorderSizePixel = 0;
+    local hotkeybutton = Instance.new("TextButton", hotkeybuttontemplateframe);
+    hotkeybutton.BackgroundTransparency = 1
+    hotkeybutton.Name = "Namee"
+    hotkeybutton.Position = UDim2.new(0.027, 0,0, 0);
+    hotkeybutton.Size = UDim2.new(0, 263,0, 30);
+    hotkeybutton.BorderSizePixel = 0;
+    hotkeybutton.Font = "SourceSans";
+    hotkeybutton.TextSize = 17;
+    hotkeybutton.TextColor3 = Color3.fromRGB(255, 255, 255);
+    hotkeybutton.TextXAlignment = "Left";
+
+    -- textbox template
+    local textboxtemplateframe = Instance.new("Frame", templatesfolder);
+    textboxtemplateframe.Name = "Template TextBox";
+    textboxtemplateframe.Size = UDim2.new(0, 271,0, 31);
+    textboxtemplateframe.BorderSizePixel = 0;
+    textboxtemplateframe.Visible = false;
+    local textbox = Instance.new("TextBox", textboxtemplateframe);
+    textbox.BackgroundTransparency = 1
+    textbox.Name = "Namee"
+    textbox.Position = UDim2.new(0.027, 0,0, 0);
+    textbox.Size = UDim2.new(0, 263,0, 30);
+    textbox.BorderSizePixel = 0;
+    textbox.Font = "SourceSans";
+    textbox.TextSize = 17;
+    textbox.Text = "";
+    textbox.TextColor3 = Color3.fromRGB(255, 255, 255);
+    textbox.TextXAlignment = "Left";
+
+    -- textbox toggle template
+    local textboxtoggletemplateframe = Instance.new("Frame", templatesfolder);
+    textboxtoggletemplateframe.Name = "Template TextBox Toggle";
+    textboxtoggletemplateframe.BorderSizePixel = 0;
+    textboxtoggletemplateframe.Size = UDim2.new(0, 271,0, 31);
+    textboxtoggletemplateframe.Visible = false;
+    local textbox = Instance.new("TextBox", textboxtoggletemplateframe);
+    textbox.BackgroundTransparency = 1;
+    textbox.BorderSizePixel = 0;
+    textbox.Name = "Namee";
+    textbox.Position = UDim2.new(0.027, 0,0, 0);
+    textbox.Size = UDim2.new(0, 263,0, 30);
+    textbox.BorderSizePixel = 0;
+    textbox.Font = "SourceSans";
+    textbox.Text = "";
+    textbox.TextSize = 17;
+    textbox.TextColor3 = Color3.fromRGB(255, 255, 255);
+    textbox.TextXAlignment = "Left";
+    local textboxtogglebutton = Instance.new("TextButton", textboxtoggletemplateframe);
+    textboxtogglebutton.BackgroundTransparency = 1;
+    textboxtogglebutton.BorderSizePixel = 0;
+    textboxtogglebutton.Position = UDim2.new(0.838, 0,0, 0);
+    textboxtogglebutton.Size = UDim2.new(0, 44,0, 30);
+    textboxtogglebutton.BorderSizePixel = 0;
+    textboxtogglebutton.Font = "SourceSans";
+    textboxtogglebutton.TextSize = 17;
+    textboxtogglebutton.Text = "OFF";
+    textboxtogglebutton.TextColor3 = Color3.fromRGB(255, 255, 255);
+
 	
 	-- window template
 	local windowtemplateframe = Instance.new("Frame",templatesfolder);
@@ -301,7 +371,8 @@ function createtemplates()
 	line.Size = UDim2.new(0, 270,0, 2);
 	line.Position = UDim2.new(0.001, 0,0.083, 0)
 	line.Image = "";
-	line.BackgroundColor3 = Color3.fromRGB(185, 20, 255);
+    line.BackgroundColor3 = Color3.fromRGB(185, 20, 255);
+    line.BorderSizePixel = 0;
 	line.Name = "Line"
 	local togglebutton = Instance.new("TextButton", title);
 	togglebutton.Name = "toggle"
@@ -343,6 +414,12 @@ function createuioptions()
     visualsbuttonoptions.Name = "Button Options"
     local visualslabeloptions=Instance.new("Folder", visualsoptions)
     visualslabeloptions.Name = "Label Options"
+    local visualhotkeyoptions=Instance.new("Folder", visualsoptions)
+    visualhotkeyoptions.Name = "Hotkey Options"
+    local visualtextboxoptions=Instance.new("Folder", visualsoptions)
+    visualtextboxoptions.Name = "TextBox Options"
+    local visualtextboxtoggleoptions=Instance.new("Folder", visualsoptions)
+    visualtextboxtoggleoptions.Name = "TextBox Toggle Options"
     local espoptions = Instance.new("Folder",visualsoptions)
     espoptions.Name = "Esp options"
     local espoptionsoptions = Instance.new("Folder",espoptions)
@@ -355,6 +432,13 @@ function createuioptions()
     espoptionslabeloptions.Name = "Label Options"
     local espoptionsslideroptions = Instance.new("Folder",espoptionsoptions)
     espoptionsslideroptions.Name = "Slider Options"
+    local espoptionshotkeyoptions=Instance.new("Folder", espoptionsoptions)
+    espoptionshotkeyoptions.Name = "Hotkey Options"
+    local espoptionstextboxoptions=Instance.new("Folder", espoptionsoptions)
+    espoptionstextboxoptions.Name = "TextBox Options"
+    local espoptionstextboxtoggleoptions=Instance.new("Folder", espoptionsoptions)
+    espoptionstextboxtoggleoptions.Name = "TextBox Toggle Options"
+    
     -- character options
     local characteroptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
     characteroptions.Name = "Character Options"
@@ -366,6 +450,12 @@ function createuioptions()
     characterlabeloptions.Name = "Label Options"
     local characterslideroptions = Instance.new("Folder",characteroptions)
     characterslideroptions.Name = "Slider Options"
+    local characterhotkeyoptions=Instance.new("Folder", characteroptions)
+    characterhotkeyoptions.Name = "Hotkey Options"
+    local charactertextboxoptions=Instance.new("Folder", characteroptions)
+    charactertextboxoptions.Name = "TextBox Options"
+    local charactertextboxtoggleoptions=Instance.new("Folder", characteroptions)
+    charactertextboxtoggleoptions.Name = "TextBox Toggle Options"
     -- miscellaneous options
     local miscellaneousoptions=Instance.new("Folder", game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Options)
     miscellaneousoptions.Name = "Miscellaneous Options"
@@ -377,6 +467,12 @@ function createuioptions()
     miscellaneouslabeloptions.Name = "Label Options"
     local miscellaneousslideroptions = Instance.new("Folder",miscellaneousoptions)
     miscellaneousslideroptions.Name = "Slider Options"
+    local miscellaneoushotkeyoptions=Instance.new("Folder", miscellaneousoptions)
+    miscellaneoushotkeyoptions.Name = "Hotkey Options"
+    local miscellaneoustextboxoptions=Instance.new("Folder", miscellaneousoptions)
+    miscellaneoustextboxoptions.Name = "TextBox Options"
+    local miscellaneoustextboxtoggleoptions=Instance.new("Folder", miscellaneousoptions)
+    miscellaneoustextboxtoggleoptions.Name = "TextBox Toggle Options"
 
     function setupui()
         -- actual window tabs
@@ -411,6 +507,27 @@ function createuioptions()
             button.Name=v.Name;
             button:WaitForChild("Label").Text=v.Name;
         end
+        for i,v in pairs(visualhotkeyoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Hotkey Button"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").Text = v.Name;
+        end
+        for i,v in pairs(visualtextboxoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
+        for i,v in pairs(visualtextboxtoggleoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox Toggle"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
         for i,v in pairs(espoptions:GetChildren()) do
             local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Multiple options"]:Clone();
             button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
@@ -438,6 +555,27 @@ function createuioptions()
             togglebutton.Visible=true;
             togglebutton.Name=v.Name;
             togglebutton:WaitForChild("Namee").Text=v.Name;
+        end
+        for i,v in pairs(espoptionshotkeyoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Hotkey Button"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").Text = v.Name;
+        end
+        for i,v in pairs(espoptionstextboxoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
+        for i,v in pairs(espoptionstextboxtoggleoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox Toggle"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
         end
         --chartacter
         for i,v in pairs(charactertogglebuttonoptions:GetChildren()) do
@@ -467,8 +605,29 @@ function createuioptions()
             button.Visible=true;
             button.Name=v.Name;
             button:WaitForChild("Namee").Text = v.Name;
-            end
-        --chartacter
+        end
+        for i,v in pairs(characterhotkeyoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Hotkey Button"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").Text = v.Name;
+        end
+        for i,v in pairs(charactertextboxoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
+        for i,v in pairs(charactertextboxtoggleoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox Toggle"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
+        --miscellaneous
         for i,v in pairs(miscellaneoustogglebuttonoptions:GetChildren()) do
             local togglebutton = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Toggle Button"]:Clone();
             togglebutton.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
@@ -497,6 +656,27 @@ function createuioptions()
             button.Name=v.Name;
             button:WaitForChild("Namee").Text = v.Name;
         end
+        for i,v in pairs(miscellaneoushotkeyoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template Hotkey Button"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").Text = v.Name;
+        end
+        for i,v in pairs(miscellaneoustextboxoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
+        for i,v in pairs(miscellaneoustextboxtoggleoptions:GetChildren()) do
+            local button = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].Templates["Template TextBox Toggle"]:Clone();
+            button.Parent=game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection;
+            button.Visible=true;
+            button.Name=v.Name;
+            button:WaitForChild("Namee").PlaceholderText = v.Name;
+        end
     end
 
     --[[	--- options u can add ---
@@ -505,8 +685,8 @@ function createuioptions()
         -  Template Label
         -  Template Toggle Button
         -  Template Window
-        - Template Hotkey Button
-        -
+        -  Template Hotkey Button
+        -  Template Slider
     ]]
 
 
@@ -534,6 +714,10 @@ function createuioptions()
     walkspeed.Name = "WalkSpeed"
     local jumppower = Instance.new("Folder", characterslideroptions)
     jumppower.Name = "JumpPower"
+    local flyhotkey = Instance.new("Folder", characterhotkeyoptions)
+    flyhotkey.Name = "Toggle Fly Hotkey;"
+    local vflyhotkey = Instance.new("Folder", characterhotkeyoptions)
+    vflyhotkey.Name = "Toggle Vehicle Fly Hotkey;"
     -- miscellaneous
     local gravity = Instance.new("Folder", miscellaneoustogglebuttonoptions)
     gravity.Name = "Low Gravity"
@@ -633,7 +817,9 @@ function colourshit()
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Button"].BackgroundColor3 = coloursettings.buttoncolor;
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Toggle Button"].BackgroundColor3 = coloursettings.togglebuttoncolor;
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Label"].BackgroundColor3 = coloursettings.labelcolor;
-	--game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Hotkey Button"].BackgroundColor3 = coloursettings.hotkeybuttoncolor;
+    game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template Hotkey Button"].BackgroundColor3 = coloursettings.hotkeybuttoncolor;
+    game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template TextBox"].BackgroundColor3 = coloursettings.textboxcolor;
+    game.Players.LocalPlayer.PlayerGui:WaitForChild("Vect0rs hub").Templates["Template TextBox Toggle"].BackgroundColor3 = coloursettings.textboxcolor;
 end;
 
 function mousebuttonscriptshit()
@@ -1411,8 +1597,8 @@ function mousebuttonscriptshit()
             game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Line.Position = UDim2.new(0.001, 0,0.083, 0)
             --tweening()
         else
-            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals"):TweenSize(UDim2.new(0, 271,0, 43), "Out", "Linear", .2, true)
-            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Line.Position = UDim2.new(-0.003, 0,0.878, 0)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals"):TweenSize(UDim2.new(0, 271,0, 40), "Out", "Linear", .2, true)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Visuals').Line.Position = UDim2.new(0.001, 0,0.916, 0)
             --tweening()
         end
     end)
@@ -1444,6 +1630,19 @@ function mousebuttonscriptshit()
         end
     end)
 
+    -- miscellaneous stuff
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Title.toggle.MouseButton1Down:Connect(function()
+        settings.miscellaneousopen = not settings.miscellaneousopen
+        if settings.miscellaneousopen then
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous"):TweenSize(UDim2.new(0, 271,0, 488), "Out", "Linear", .2, true)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Miscellaneous').Line.Position = UDim2.new(0.001, 0,0.083, 0)
+            --tweening()
+        else
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous"):TweenSize(UDim2.new(0, 271,0, 40), "Out", "Linear", .2, true)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild('Miscellaneous').Line.Position = UDim2.new(0.001, 0,0.916, 0)
+            --tweening()
+        end
+    end)
 
     -- main
 
@@ -1657,6 +1856,30 @@ function mousebuttonscriptshit()
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = maxval * 1
     end)
 
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Fly Hotkey;"].Namee.MouseButton1Click:Connect(function()
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Fly Hotkey;"].Namee.Text = 'Press any Key now'
+        local input = UserInput.InputBegan:wait()
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+            settings.flykey = tostring(input.KeyCode)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Fly Hotkey;"].Namee.Text = "Toggle Fly Key; '"..string.sub(tostring(input.KeyCode), 14).."'"
+        else
+            settings.flykey = tostring(input.UserInputType)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Fly Hotkey;"].Namee.Text = "Toggle Fly Key; '"..string.sub(tostring(input.UserInputType), 20).."'"
+        end
+    end)
+
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Vehicle Fly Hotkey;"].Namee.MouseButton1Click:Connect(function()
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Vehicle Fly Hotkey;"].Namee.Text = 'Press any Key now'
+        local input = UserInput.InputBegan:wait()
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+            settings.vflykey = tostring(input.KeyCode)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Vehicle Fly Hotkey;"].Namee.Text = "Toggle Fly Key; '"..string.sub(tostring(input.KeyCode), 14).."'"
+        else
+            settings.vflykey = tostring(input.UserInputType)
+            game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection["Toggle Vehicle Fly Hotkey;"].Namee.Text = "Toggle Fly Key; '"..string.sub(tostring(input.UserInputType), 20).."'"
+        end
+    end)
+
     -- miscellaneous shit
     game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Low Gravity"].Toggle.MouseButton1Down:Connect(function()
         settings.gravity = not settings.gravity;
@@ -1682,11 +1905,31 @@ function mousebuttonscriptshit()
         game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection["Gravity Slider"].Value2.Text = "["..tostring(maxval * 1).."/196]";
         game.workspace.Gravity = maxval * 1
     end)
+
     game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection.Rejoin.Button.MouseButton1Down:Connect(function()
         game:GetService('TeleportService'):Teleport(game.PlaceId)
     end)
 end;
 
+UserInput.InputBegan:Connect(function(input)
+    if tostring(input.KeyCode) == settings.flykey or tostring(input.UserInputType) == settings.flykey then
+        if settings.vfly == false then
+            settings.vfly = true
+            sFLY()
+        else
+            settings.vfly = true
+            NOFLY()
+        end
+    elseif tostring(input.KeyCode) == settings.vflykey or tostring(input.UserInputType) == settings.vflykey then
+        if settings.vfly == false then
+            settings.vfly = true
+            sFLY(true)
+        else
+            settings.vfly = true
+            NOFLY()
+        end
+    end
+end)
 
 Plrs.PlayerAdded:connect(function(Plr)
 	if settings.CharAddedEvent[Plr.Name] == nil then
