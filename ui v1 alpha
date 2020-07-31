@@ -2168,7 +2168,7 @@ function mousebuttonscriptshit()
     end)
 end;
 
-function smail()
+function smailerrorgottafix()
     error"\nhi smail this is an error report back to me now!111!!11!\n also try to test my uis when me asks to cuz is annoying fixing tons of errors at de same time.. jk but yea love u bro!"
 end;
 
@@ -2228,4 +2228,4 @@ createtemplates();
 colourshit();
 createuioptions();
 mousebuttonscriptshit();
-smail();
+smailerrorgottafix();
