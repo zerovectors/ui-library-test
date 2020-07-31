@@ -203,13 +203,15 @@ function createtemplates()
 	options.Name = "Options";
 	options.Size = UDim2.new(0, 271,0, 258);
 	options.BackgroundTransparency = 1;
-	options.ClipsDescendants = true;
+    options.ClipsDescendants = true;
+    options.BorderSizePixel = 0;
 	local uilistlayout = Instance.new("UIListLayout", options);
 	uilistlayout.SortOrder = "LayoutOrder";
 	local namee = Instance.new("TextLabel", multipleoptionstemplateframe);
 	namee.Size = UDim2.new(0, 271,0, 31);
 	namee.Name = "Namee";
-	namee.BackgroundColor3 = Color3.fromRGB(18, 18, 18);
+    namee.BackgroundColor3 = Color3.fromRGB(18, 18, 18);
+    namee.BorderSizePixel = 0;
 	namee.TextColor3 = Color3.fromRGB(255,255,255);
 	namee.Font = "SourceSansBold";
 	namee.TextSize = 18
@@ -871,7 +873,7 @@ function createuioptions()
     rejoin.Name = "Rejoin"
     -- ui settings
     local transparency = Instance.new("Folder", interfaceoptionsslideroptions)
-    transparency.Name = "Transparency"
+    transparency.Name = "Button Transparency"
     local icon = Instance.new("Folder", interfaceoptionstextboxoptions)
     icon.Name = "Icon ID;"
     local iconenabled = Instance.new("Folder", interfaceoptionstogglebuttonoptions)
@@ -2119,6 +2121,55 @@ function mousebuttonscriptshit()
     local idvalue = game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection["Interface"].Options["Icon ID;"].Namee.Text
     game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection["Interface"].Options["Icon ID;"].Namee.Text = "Icon ID; "..idvalue
     end)
+
+	local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.AbsoluteWindowSize.X) * 100)
+	game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Value.Text = tostring(maxval / 100);
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Value2.Text = "[0/1]";
+    game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.Changed:Connect(function(c) if (c ~= "CanvasPosition") then return end
+        local maxval = math.floor(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.CanvasPosition.X / (game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.CanvasSize.X.Offset - game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Scroller.AbsoluteWindowSize.X) * 100)
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Value.Text = tostring(maxval / 100)
+        game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options["Button Transparency"].Value2.Text = "["..tostring(maxval / 100).."/1]";
+        --script.Parent.ImageTransparency = maxval / 100
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection:GetChildren()) do
+            if not v:IsA("UIListLayout") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"].Options:GetChildren()) do
+            if not v:IsA("UIListLayout") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Visuals").Selection["ESP Options"]:GetChildren()) do
+            if v:IsA("TextLabel") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Character").Selection:GetChildren()) do
+            if not v:IsA("UIListLayout") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("Miscellaneous").Selection:GetChildren()) do
+            if not v:IsA("UIListLayout") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface.Options:GetChildren()) do
+            if not v:IsA("UIListLayout") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+        for i,v in pairs(game.Players.LocalPlayer.PlayerGui["Vect0rs hub"].mainframe:WaitForChild("UI Settings").Selection.Interface:GetChildren()) do
+            if v:IsA("TextLabel") then
+                v.BackgroundTransparency = maxval / 100
+            end
+        end
+    end)
+end;
+
+function smail()
+    error"\nhi smail this is an error report back to me now!111!!11!\n also try to test my uis when me asks to cuz is annoying fixing tons of errors at de same time.. jk but yea love u bro!"
 end;
 
 UserInput.InputBegan:Connect(function(input)
@@ -2177,3 +2228,4 @@ createtemplates();
 colourshit();
 createuioptions();
 mousebuttonscriptshit();
+smail();
