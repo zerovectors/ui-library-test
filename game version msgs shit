@@ -1,6 +1,6 @@
 return {
 	["Prison Life"] = {
-		version = "2",
+		version = "5",
 		reason = "Fuck Discord"
 	},
 	messages_of_the_day = {
