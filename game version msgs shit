@@ -12,14 +12,8 @@ return {
 		[6] = "😎", 
 		[7] = "Good evening";
 		[8] = "Good morning";
-		[9] = "Smail is an op friend ngl";
-		[10] = "Bhopping is fun";
-		[11] = "My 1st ui library ish is op";
-		[12] = "SYNAPSE X #1";
-		[13] = "Ngl there's hardly any good evelynn hentai :/"; 
-		[14] = "😎", 
-		[15] = "Good evening";
-		[16] = "Good morning";
+		[9] = "a";
+		[10] = "penis";
 	},
 	blacklist_table = {
 		["27724199"] = true,
