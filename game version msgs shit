@@ -1,0 +1,25 @@
+return {
+	["Prison Life"] = {
+		version = "2.15.5",
+		reason = "Fuck Discord"
+	},
+	messages_of_the_day = {
+		[1] = "Smail is an op friend ngl",
+		[2] = "Bhopping is fun",
+		[3] = "My 1st ui library ish is op", 
+		[4] = "SYNAPSE X #1",
+		[5] = "Ngl there's hardly any good evelynn hentai :/", 
+		[6] = "😎", 
+		[7] = "Good evening", 
+		[8] = "Good morning"
+	},
+	blacklist_table = {
+		["27724199"] = true,
+		["772988738"] = true,
+		["771065261"] = true,
+		["777424281"] = true,
+		["88260253"] = true,
+		["45713537"] = true,
+		["675274907"] = true,
+	} -- lul i know smart people can bypass this easily. /shrug
+}
