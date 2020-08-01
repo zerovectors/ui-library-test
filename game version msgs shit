@@ -4,14 +4,22 @@ return {
 		reason = "Fuck Discord"
 	},
 	messages_of_the_day = {
-		[1] = "Smail is an op friend ngl",
-		[2] = "Bhopping is fun",
-		[3] = "My 1st ui library ish is op", 
-		[4] = "SYNAPSE X #1",
-		[5] = "Ngl there's hardly any good evelynn hentai :/", 
+		[1] = "Smail is an op friend ngl";
+		[2] = "Bhopping is fun";
+		[3] = "My 1st ui library ish is op";
+		[4] = "SYNAPSE X #1";
+		[5] = "Ngl there's hardly any good evelynn hentai :/"; 
 		[6] = "😎", 
-		[7] = "Good evening", 
-		[8] = "Good morning"
+		[7] = "Good evening";
+		[8] = "Good morning";
+		[1] = "Smail is an op friend ngl";
+		[2] = "Bhopping is fun";
+		[3] = "My 1st ui library ish is op";
+		[4] = "SYNAPSE X #1";
+		[5] = "Ngl there's hardly any good evelynn hentai :/"; 
+		[6] = "😎", 
+		[7] = "Good evening";
+		[8] = "Good morning";
 	},
 	blacklist_table = {
 		["27724199"] = true,
