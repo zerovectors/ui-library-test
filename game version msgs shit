@@ -1,7 +1,7 @@
 return {
 	["Prison Life"] = {
-		version = "1",
-		reason = "Fuck Discord"
+		version = "0.1",
+		reason = "Updated cuz i felt like it :sunglasses: 😎"
 	},
 	messages_of_the_day = {
 		[1] = "Smail is an op friend ngl";
