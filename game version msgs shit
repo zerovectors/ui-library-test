@@ -9,11 +9,9 @@ return {
 		[3] = "My 1st ui library ish is op";
 		[4] = "SYNAPSE X #1";
 		[5] = "Ngl there's hardly any good evelynn hentai :/"; 
-		[6] = "😎", 
-		[7] = "Good evening";
-		[8] = "Good morning";
-		[9] = "a";
-		[10] = "penis";
+		[6] = "😎"; 
+		[7] = "Good day";
+		[8] = "Might make a discord server 🤔";
 	},
 	blacklist_table = {
 		["27724199"] = true,
