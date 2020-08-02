@@ -1,6 +1,6 @@
 return {
-	["Prison Life"] = {
-		version = "0.1",
+	["Natural Disasters"] = {
+		version = "5.0",
 		reason = "Updated cuz i felt like it :sunglasses: 😎"
 	},
 	messages_of_the_day = {
