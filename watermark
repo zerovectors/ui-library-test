@@ -48,7 +48,7 @@ Hint.Parent = Text
 Hint.Text = "Click Vect0rs Hub!"
 Hint.BackgroundTransparency = 1
 Hint.TextColor3 = Color3.fromRGB(247, 3, 255)
-Hint.Position = UDim2.new(0, 0,0, 160)
+Hint.Position = UDim2.new(0.45, 0,0, 190)
 
 local TweenService = game:GetService("TweenService")
 local Object = game.CoreGui:WaitForChild("uwuware").watermark:WaitForChild("Name").Icon -- The object you want to tween.
