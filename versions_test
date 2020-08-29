@@ -1,0 +1,17 @@
+return {
+	["Default UI"] = {
+		version = "1.2", 
+		force_kick = true,
+		reason = "Outdated",
+	},
+	messages_of_the_day = {
+		[1] = "SYNAPSE X - BEST EXPLOIT",
+		[2] = "BUY SYNAPSE X",
+		[3] = "PHANTOM FORCES IS GETTING FUCKED", 
+		[4] = "SYNAPSE X",
+		[5] = "-", 
+		[6] = "-", 
+		[7] = "-", 
+		[8] = "-"
+	},
+}
