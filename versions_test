@@ -1,6 +1,6 @@
 return {
 	["Default UI"] = {
-		version = "2"; 
+		version = "3"; 
 		force_kick = true;
 		reason = "test";
 	};
