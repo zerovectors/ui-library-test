@@ -1,0 +1,84 @@
+local Frame = Instance.new("ImageLabel")
+local UIListLayout = Instance.new("UIListLayout")
+local Text = Instance.new("ImageButton")
+local Name = Instance.new("Frame")
+local Hint = Instance.new("TextLabel")
+local Icon = Instance.new("ImageLabel")
+
+Frame.Name = "watermark"
+Frame.Parent = game.CoreGui:WaitForChild("uwuware")
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.ClipsDescendants = true
+Frame.Position = UDim2.new(-1, 0, 0.275999993, 0)
+Frame.Size = UDim2.new(0, 189, 0, 204)
+Frame.Image = "rbxassetid://3570695787"
+Frame.ImageColor3 = Color3.fromRGB(35, 35, 35)
+Frame.ScaleType = Enum.ScaleType.Slice
+Frame.SliceCenter = Rect.new(100, 100, 100, 100)
+Frame.SliceScale = 0.120
+
+UIListLayout.Parent = Frame
+UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+
+Text.Name = "Text"
+Text.Parent = Frame
+Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Text.BackgroundTransparency = 1.000
+Text.Position = UDim2.new(0.394422323, 0, 0, 0)
+Text.Size = UDim2.new(0, 304, 0, 204)
+Text.Image = "http://www.roblox.com/asset/?id=5545516032"
+
+Name.Name = "Name"
+Name.Parent = Frame
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.Size = UDim2.new(0, 176, 0, 204)
+
+Icon.Name = "Icon"
+Icon.Parent = Name
+Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Icon.BackgroundTransparency = 1.000
+Icon.BorderSizePixel = 0
+Icon.Position = UDim2.new(-0.326780885, 0, -0.322929174, 0)
+Icon.Size = UDim2.new(0, 296, 0, 334)
+Icon.Image = "http://www.roblox.com/asset/?id=5448429554"
+
+Hint.Parent = Text
+Hint.Text = "Click Vect0rs Hub!"
+Hint.BackgroundTransparency = 1
+Hint.TextColor3 = Color3.fromRGB(247, 3, 255)
+Hint.Position = UDim2.new(0, 0,0, 160)
+
+local TweenService = game:GetService("TweenService")
+local Object = game.CoreGui:WaitForChild("uwuware").watermark:WaitForChild("Name").Icon -- The object you want to tween.
+
+local tweenInfo = TweenInfo.new(
+    1, -- The time the tween takes to complete
+    Enum.EasingStyle.Linear, -- The tween style.
+    Enum.EasingDirection.Out, -- EasingDirection
+    1, -- How many times you want the tween to repeat. If you make it less than 0 it will repeat forever.
+    false, -- Reverse?
+    0 -- Delay
+)
+
+    local Tween = TweenService:Create(Object, tweenInfo, {Rotation = 360})
+    Tween:Play() -- Plays the tween
+    game.CoreGui:WaitForChild("uwuware").watermark:TweenPosition(UDim2.new(0.308, 0,0.276, 0), "Out", "Linear", 2, true)
+    wait(2)
+    game.CoreGui:WaitForChild("uwuware").watermark:TweenSize(UDim2.new(0, 502,0, 204), "Out", "Linear", .5, true)
+    Text.MouseButton1Down:Connect(function()
+    Tween:Play() -- Plays the tween
+    for i = 0, 1, .1 do
+        wait(0.03)
+            game.CoreGui:WaitForChild("uwuware").watermark.Text.ImageTransparency = i
+    end
+    for i = 0, .5, .1 do
+        wait(0.03)
+            game.CoreGui:WaitForChild("uwuware").watermark.ImageTransparency = i
+            game.CoreGui:WaitForChild("uwuware").watermark:WaitForChild("Name").Icon.ImageTransparency = i
+    end
+    game.CoreGui:WaitForChild("uwuware").watermark:TweenPosition(UDim2.new(0.902, 0,0.684, 0), "Out", "Linear", 2, true)
+    game.CoreGui:WaitForChild("uwuware").watermark:TweenSize(UDim2.new(0, 166,0, 192), "Out", "Linear", 2, true)
+
+end)
