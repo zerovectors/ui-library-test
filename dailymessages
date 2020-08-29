@@ -1,6 +1,6 @@
 return {
 	["Default UI"] = {
-		version = "5", 
+		version = "1.2", 
 		force_kick = true,
 		reason = "Outdated",
 	},
