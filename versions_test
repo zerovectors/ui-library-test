@@ -1,7 +1,21 @@
 return {
-	["Test Ui"] = {
-		version = "1.2", 
-		force_kick = true,
-		reason = "Outdated",
+	["Default UI"] = {
+		version = "2"; 
+		force_kick = true;
+		reason = "test";
+	};
+    ["Tapping Simulator"] = {
+		version = "2"; 
+		force_kick = true;
+		reason = "Major Update";
+	};
+	messages_of_the_day = {
+		[1] = "SYNAPSE X - BEST EXPLOIT",
+		[2] = "BUY SYNAPSE X",
+		[3] = "SYNAPSE X",
+		[4] = "I Hope You Like The Re-written Version Of The UI UwU",
+		[5] = "More UI Librarys Supported Soon:tm:",
+		[6] = "Asians Are Hot Ngl", 
+		[7] = "Drum And Bass Is OP",
 	},
 }
