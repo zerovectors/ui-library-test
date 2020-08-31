@@ -1,0 +1,71 @@
+local Name = Instance.new("TextLabel")
+local Role = Instance.new("TextLabel")
+local Username = Instance.new("TextLabel")
+local Time = Instance.new("TextLabel")
+local Info = Instance.new("ImageLabel")
+local Line = Instance.new("Frame")
+Info.Name = "Info"
+Info.Parent = game.CoreGui:WaitForChild("uwuware")
+Info.Active = true
+Info.Draggable = true
+Info.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Info.BorderSizePixel = 0
+Info.ClipsDescendants = true
+Info.Position = UDim2.new(0.00731261447, 0, 0.28009823, 0)
+Info.Size = UDim2.new(0, 257, 0, 22)
+Info.SizeConstraint = Enum.SizeConstraint.RelativeYY
+Info.ScaleType = Enum.ScaleType.Slice
+Info.SliceCenter = Rect.new(100, 100, 100, 100)
+
+Name.Name = "Name"
+Name.Parent = Info
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.Position = UDim2.new(0, 0, 0.409090906, 0)
+Name.Size = UDim2.new(0, 39, 0, 13)
+Name.Font = Enum.Font.SourceSansBold
+Name.Text = "Vect0rs Hub"
+Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+Name.TextSize = 14.000
+Name.TextScaled = true
+
+Role.Name = "Role"
+Role.Parent = Info
+Role.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Role.BackgroundTransparency = 1.000
+Role.Position = UDim2.new(0.175097257, 0, 0.409090906, 0)
+Role.Size = UDim2.new(0, 39, 0, 13)
+Role.Font = Enum.Font.SourceSansBold
+Role.TextColor3 = Color3.fromRGB(255, 255, 255)
+Role.TextSize = 14.000
+Role.Text = _G.role
+
+Username.Name = "Username"
+Username.Parent = Info
+Username.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Username.BackgroundTransparency = 1.000
+Username.Position = UDim2.new(0.354085594, 0, 0.409090906, 0)
+Username.Size = UDim2.new(0, 60, 0, 13)
+Username.Font = Enum.Font.SourceSansBold
+Username.Text = _G.username
+Username.TextColor3 = Color3.fromRGB(255, 255, 255)
+Username.TextSize = 14.000
+Username.TextTruncate = "AtEnd"
+
+Time.Name = "Time"
+Time.Parent = Info
+Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Time.BackgroundTransparency = 1.000
+Time.Position = UDim2.new(0.610894918, 0, 0.409090906, 0)
+Time.Size = UDim2.new(0, 100, 0, 13)
+Time.Font = Enum.Font.SourceSansBold
+Time.TextColor3 = Color3.fromRGB(255, 255, 255)
+Time.TextSize = 14.000
+Line.Name = "Line"
+Line.Parent = Info
+Line.BackgroundColor3 = Color3.fromRGB(221, 3, 255)
+Line.BorderSizePixel = 0
+Line.Size = UDim2.new(0, 257, 0, 5)
+while wait() do
+Time.Text = _G.usertime
+end
