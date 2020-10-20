@@ -42,7 +42,7 @@ Icon.BackgroundTransparency = 1.000
 Icon.BorderSizePixel = 0
 Icon.Position = UDim2.new(-0.326780885, 0, -0.322929174, 0)
 Icon.Size = UDim2.new(0, 296, 0, 334)
-Icon.Image = "http://www.roblox.com/asset/?id=5448429554"
+Icon.Image = "http://www.roblox.com/asset/?id=5852497605"
 
 Hint.Parent = Text
 Hint.Text = "Click Vect0rs Hub!"
