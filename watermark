@@ -12,7 +12,7 @@ Frame.BackgroundTransparency = 1.000
 Frame.ClipsDescendants = true
 Frame.Position = UDim2.new(-1, 0, 0.275999993, 0)
 Frame.Size = UDim2.new(0, 189, 0, 204)
-Frame.Image = "rbxassetid://3570695787"
+Frame.Image = "rbxassetid://5852497605"
 Frame.ImageColor3 = Color3.fromRGB(35, 35, 35)
 Frame.ScaleType = Enum.ScaleType.Slice
 Frame.SliceCenter = Rect.new(100, 100, 100, 100)
@@ -27,7 +27,7 @@ Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Text.BackgroundTransparency = 1.000
 Text.Position = UDim2.new(0.394422323, 0, 0, 0)
 Text.Size = UDim2.new(0, 304, 0, 204)
-Text.Image = "http://www.roblox.com/asset/?id=5545516032"
+Text.Image = "http://www.roblox.com/asset/?id=5852498629"
 
 Name.Name = "Name"
 Name.Parent = Frame
