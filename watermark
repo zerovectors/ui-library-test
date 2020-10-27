@@ -27,7 +27,7 @@ Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Text.BackgroundTransparency = 1.000
 Text.Position = UDim2.new(0.394422323, 0, 0, 0)
 Text.Size = UDim2.new(0, 304, 0, 204)
-Text.Image = "http://www.roblox.com/asset/?id=5852498629"
+Text.Image = "http://www.roblox.com/asset/?id=5852498608"
 
 Name.Name = "Name"
 Name.Parent = Frame
@@ -42,7 +42,7 @@ Icon.BackgroundTransparency = 1.000
 Icon.BorderSizePixel = 0
 Icon.Position = UDim2.new(-0.326780885, 0, -0.322929174, 0)
 Icon.Size = UDim2.new(0, 296, 0, 334)
-Icon.Image = "http://www.roblox.com/asset/?id=5852497605"
+Icon.Image = "http://www.roblox.com/asset/?id=5852497564"
 
 Hint.Parent = Text
 Hint.Text = "Click Vect0rs Hub!"
